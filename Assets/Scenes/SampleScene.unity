@@ -662,7 +662,6 @@ GameObject:
   - component: {fileID: 1964602098}
   - component: {fileID: 1964602100}
   - component: {fileID: 1964602102}
-  - component: {fileID: 1964602101}
   m_Layer: 0
   m_Name: XR Origin
   m_TagString: Untagged
@@ -716,23 +715,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AnchorPrefab: {fileID: 0}
---- !u!114 &1964602101
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1964602097}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 34fa4e0f95b70264a8503ca412c9fe15, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  planeManager: {fileID: 1964602102}
-  anchoredPrefab: {fileID: 5129718461180321550, guid: 85e604e8300c46c4f9ce6bff6e58018d,
-    type: 3}
-  defaultPrefab: {fileID: 6255190112567333244, guid: 908d34ddf0aeb094ea95c2adf6acd69a,
-    type: 3}
 --- !u!114 &1964602102
 MonoBehaviour:
   m_ObjectHideFlags: 0
