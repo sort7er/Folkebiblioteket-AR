@@ -1328,6 +1328,7 @@ GameObject:
   - component: {fileID: 1964602102}
   - component: {fileID: 1964602104}
   - component: {fileID: 1964602103}
+  - component: {fileID: 1964602105}
   m_Layer: 0
   m_Name: XR Origin
   m_TagString: Untagged
@@ -1513,6 +1514,22 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+--- !u!114 &1964602105
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1964602097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 246c619998a05384499bbc7a12659576, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  arExperienceManager: {fileID: 1964602104}
+  anchorManager: {fileID: 1964602100}
+  churchPrefab: {fileID: 8627553688903744948, guid: da4ca6272173a9045853e63b01eac474,
+    type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
