@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine;
 using Unity.XR.CoreUtils;
-using Google.XR.ARCoreExtensions;
-using UnityEngine.UIElements;
 using System;
 
 public class CloudAnchorController : MonoBehaviour
