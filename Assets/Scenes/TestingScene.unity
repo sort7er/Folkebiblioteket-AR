@@ -466,10 +466,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 505483744}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 300, y: -15}
+  m_SizeDelta: {x: 560, y: 66.426926}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!1 &54873999
 GameObject:
@@ -3512,10 +3512,10 @@ RectTransform:
   - {fileID: 22273610}
   m_Father: {fileID: 1876131992}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 300, y: 0}
+  m_SizeDelta: {x: 600, y: 96.426926}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &505483745
 MonoBehaviour:
@@ -5609,7 +5609,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1033558405}
   - component: {fileID: 1033558404}
-  - component: {fileID: 1033558406}
   m_Layer: 0
   m_Name: Google Cloud Anchors
   m_TagString: Untagged
@@ -5631,13 +5630,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sessionOrigin: {fileID: 1964602098}
   session: {fileID: 207147542}
-  extensions: {fileID: 0}
   anchorManager: {fileID: 1964602100}
   planeManager: {fileID: 1964602102}
   raycastManager: {fileID: 1964602109}
   homeView: {fileID: 1656072489}
   resolveView: {fileID: 1993283309}
-  hostView: {fileID: 1643808590}
+  arView: {fileID: 1643808590}
   mode: 0
 --- !u!4 &1033558405
 Transform:
@@ -5655,24 +5653,6 @@ Transform:
   - {fileID: 411692284}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1033558406
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1033558403}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b50ad3f5d9024549b0a549c5a03a084, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Session: {fileID: 207147542}
-  SessionOrigin: {fileID: 0}
-  CameraManager: {fileID: 1375737373}
-  ARCoreExtensionsConfig: {fileID: 11400000, guid: 0f1dfda3b8b72be4b8d0d147e3ec67da,
-    type: 2}
-  CameraConfigFilter: {fileID: 0}
 --- !u!1 &1059519186
 GameObject:
   m_ObjectHideFlags: 0
@@ -8373,13 +8353,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1643808591}
+  - component: {fileID: 1643808593}
+  - component: {fileID: 1643808592}
   m_Layer: 5
   m_Name: ARView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1643808591
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8401,6 +8383,43 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1643808592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1643808590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d3985182d881904298a6c38a053f641, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  instructionBar: {fileID: 0}
+  namePanel: {fileID: 0}
+  inputFieldWarning: {fileID: 0}
+  nameField: {fileID: 0}
+  instructionText: {fileID: 0}
+  trackingHelperText: {fileID: 0}
+  saveButtonText: {fileID: 0}
+  saveButton: {fileID: 0}
+  shareButton: {fileID: 0}
+--- !u!114 &1643808593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1643808590}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19fa6d5297d9e3a4dbb32b3e3f95b9a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 1033558404}
+  uiHandler: {fileID: 1643808592}
+  prefab: {fileID: 8627553688903744948, guid: da4ca6272173a9045853e63b01eac474, type: 3}
+  mapQualityIndicatorPrefab: {fileID: 0}
 --- !u!1 &1656072489
 GameObject:
   m_ObjectHideFlags: 0
@@ -8574,7 +8593,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1705358918
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9690,7 +9709,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: -100}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: -52.19159, y: -1213.0818}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1876131993
 MonoBehaviour:
@@ -10468,6 +10487,7 @@ GameObject:
   - component: {fileID: 1964602102}
   - component: {fileID: 1964602109}
   - component: {fileID: 1964602108}
+  - component: {fileID: 1964602110}
   m_Layer: 0
   m_Name: XR Origin
   m_TagString: Untagged
@@ -10563,6 +10583,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_RaycastPrefab: {fileID: 0}
+--- !u!114 &1964602110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1964602097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b50ad3f5d9024549b0a549c5a03a084, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Session: {fileID: 207147542}
+  SessionOrigin: {fileID: 0}
+  CameraManager: {fileID: 1375737373}
+  ARCoreExtensionsConfig: {fileID: 11400000, guid: 0f1dfda3b8b72be4b8d0d147e3ec67da,
+    type: 2}
+  CameraConfigFilter: {fileID: 0}
 --- !u!1 &1993283309
 GameObject:
   m_ObjectHideFlags: 0

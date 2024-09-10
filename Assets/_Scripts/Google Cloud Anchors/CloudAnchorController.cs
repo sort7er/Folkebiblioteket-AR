@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine;
@@ -10,7 +9,7 @@ public class CloudAnchorController : MonoBehaviour
     [Header("AR Foundation")]
     public XROrigin sessionOrigin;
     public ARSession session;
-    public ARCoreExtensions extensions;
+    //public ARCoreExtensions extensions;
     public ARAnchorManager anchorManager;
     public ARPlaneManager planeManager;
     public ARRaycastManager raycastManager;
@@ -18,12 +17,11 @@ public class CloudAnchorController : MonoBehaviour
     [Header("UI")]
     public GameObject homeView;
     public GameObject resolveView;
-    public GameObject hostView;
+    public GameObject arView;
 
     [HideInInspector] public ApplicationMode mode = ApplicationMode.Ready;
     public HashSet<string> resolvingSet = new HashSet<string>();
 
-    private const string hasDisplayedStartInfoKey = "HasDisplayedStartInfo";
     private const string persistentCloudAnchorsStorageKey = "PersistentCloudAnchors";
     private const int storageLimit = 40;
 
@@ -66,20 +64,19 @@ public class CloudAnchorController : MonoBehaviour
     public void SwitchToARView()
     {
         ResetAllViews();
-        hostView.SetActive(true);
+        arView.SetActive(true);
         SetPlatformActive(true);
     }
     public void SwitchToResolveMenu()
     {
         ResetAllViews();
         resolveView.SetActive(true);  
-        //This should open another menu later
     }
 
     private void ResetAllViews()
     {
         SetPlatformActive(false);
-        hostView.SetActive(false);
+        arView.SetActive(false);
         resolveView.SetActive(false);
         homeView.SetActive(false);
     }
@@ -88,7 +85,7 @@ public class CloudAnchorController : MonoBehaviour
     {
         sessionOrigin.gameObject.SetActive(active);
         session.gameObject.SetActive(active);
-        extensions.gameObject.SetActive(active);
+        //extensions.gameObject.SetActive(active);
     }
     #endregion
 

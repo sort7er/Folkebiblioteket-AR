@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 
-public class ARViewUIHandler : MonoBehaviour
+public class ARViewUI : MonoBehaviour
 {
     public GameObject instructionBar;
     public GameObject namePanel;

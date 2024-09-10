@@ -7,12 +7,12 @@ using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 
 
-public class ARViewManager : MonoBehaviour
+public class ARViewLogic : MonoBehaviour
 {
     public CloudAnchorController controller;
-    public ARViewUIHandler uiHandler;
+    public ARViewUI uiHandler;
     public GameObject prefab;
-    public GameObject mapQualityIndicatorPrefab;
+    public MapQualityIndicator mapQualityIndicatorPrefab;
 
 
 
@@ -181,8 +181,7 @@ public class ARViewManager : MonoBehaviour
             {
                 // If the player has not touched the screen then the update is complete.
                 Touch touch;
-                if (Input.touchCount < 1 ||
-                    (touch = Input.GetTouch(0)).phase != TouchPhase.Began)
+                if (Input.touchCount < 1 || (touch = Input.GetTouch(0)).phase != TouchPhase.Began)
                 {
                     return;
                 }
@@ -318,8 +317,7 @@ public class ARViewManager : MonoBehaviour
             Instantiate(prefab, anchor.transform);
 
             // Attach map quality indicator to this anchor.
-            var indicatorGO = Instantiate(mapQualityIndicatorPrefab, anchor.transform);
-            mapQualityIndicator = indicatorGO.GetComponent<MapQualityIndicator>();
+            mapQualityIndicator = Instantiate(mapQualityIndicatorPrefab, anchor.transform);
             mapQualityIndicator.DrawIndicator(planeType, controller.MainCamera);
 
             uiHandler.SetInstructionText("To save this location, walk around the object to capture it from different angles");
