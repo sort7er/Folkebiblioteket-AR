@@ -78,38 +78,40 @@ public class MapQualityIndicator : MonoBehaviour
             }
 
             fadingTimer += Time.deltaTime;
-            float alpha = Mathf.Clamp(1 - (fadingTimer / fadingDuration), 0, 1);
-            //CircleRenderer.SetAlpha(alpha);
-            foreach (MapQualityBar bar in mapQualityBars)
-            {
-                bar.SetAlpha(alpha);
-            }
+            SetAplha();
 
             return;
         }
         else if (fadingTimer > 0)
         {
             fadingTimer -= Time.deltaTime;
-            float alpha = Mathf.Clamp(1 - (fadingTimer / fadingDuration), 0, 1);
-            //CircleRenderer.SetAlpha(alpha);
-            foreach (MapQualityBar bar in mapQualityBars)
-            {
-                bar.SetAlpha(alpha);
-            }
+            SetAplha();
         }
 
         // Update visited bar.
-        foreach (MapQualityBar bar in mapQualityBars)
+        for (int i = 0; i < mapQualityBars.Count; i++)
         {
-            if (IsLookingAtBar(bar))
+            if (IsLookingAtBar(mapQualityBars[i]))
             {
-                bar.IsVisited = true;
-                bar.QualityState = currentQualityState;
+                mapQualityBars[i].IsVisited = true;
+                mapQualityBars[i].QualityState = currentQualityState;
             }
         }
 
         PlayDisappearAnimation();
     }
+
+    private void SetAplha()
+    {
+        float alpha = Mathf.Clamp(1 - (fadingTimer / fadingDuration), 0, 1);
+
+        //CircleRenderer.SetAlpha(alpha);
+        for (int i = 0; i < mapQualityBars.Count; i++)
+        {
+            mapQualityBars[i].SetAlpha(alpha);
+        }
+    }
+
     public void UpdateQualityState(int quality)
     {
         currentQualityState = quality;

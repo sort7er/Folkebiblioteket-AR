@@ -655,8 +655,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
+      - m_Target: {fileID: 1643808593}
+        m_TargetAssemblyTypeName: ARViewLogic, Assembly-CSharp
         m_MethodName: OnShareButtonClicked
         m_Mode: 1
         m_Arguments:
@@ -2342,7 +2342,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 20, y: -160}
+  m_AnchoredPosition: {x: 20, y: -20}
   m_SizeDelta: {x: 160, y: 160}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &840228692
@@ -2998,10 +2998,10 @@ RectTransform:
   - {fileID: 127290879}
   m_Father: {fileID: 1733191022}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 490, y: -387.5}
-  m_SizeDelta: {x: 980, y: 225}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1322663380
 MonoBehaviour:
@@ -3404,10 +3404,10 @@ RectTransform:
   - {fileID: 16589439}
   m_Father: {fileID: 1733191022}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 490, y: -112.5}
-  m_SizeDelta: {x: 980, y: 225}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1375873904
 MonoBehaviour:
@@ -4149,7 +4149,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1643808591
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4227,7 +4227,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1656072490
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4350,8 +4350,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: 
+      - m_Target: {fileID: 1643808593}
+        m_TargetAssemblyTypeName: ARViewLogic, Assembly-CSharp
         m_MethodName: OnSaveButtonClicked
         m_Mode: 1
         m_Arguments:
@@ -5126,7 +5126,7 @@ GameObject:
   - component: {fileID: 1823275353}
   - component: {fileID: 1823275352}
   m_Layer: 5
-  m_Name: SnackBar
+  m_Name: TrackingBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6192,6 +6192,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1993283310}
+  - component: {fileID: 1993283311}
   m_Layer: 5
   m_Name: ResolveView
   m_TagString: Untagged
@@ -6220,6 +6221,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1993283311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1993283309}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09f4a8bcb03aa2e42a13d1036615f5e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  controller: {fileID: 0}
+  inputField: {fileID: 0}
+  warning: {fileID: 0}
+  resolveButton: {fileID: 0}
+  resolveButtonImage: {fileID: 0}
 --- !u!1 &2008985633
 GameObject:
   m_ObjectHideFlags: 0

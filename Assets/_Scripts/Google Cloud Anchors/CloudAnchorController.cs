@@ -91,35 +91,35 @@ public class CloudAnchorController : MonoBehaviour
 
     #region CloudAnchorHistory
 
-    public CloudAnchorHistoryCollection LoadCloudAnchorHistory()
+    public StoredCloudAnchorCollection LoadCloudAnchorHistory()
     {
         if (PlayerPrefs.HasKey(persistentCloudAnchorsStorageKey))
         {
-            CloudAnchorHistoryCollection history = JsonUtility.FromJson<CloudAnchorHistoryCollection>(PlayerPrefs.GetString(persistentCloudAnchorsStorageKey));
+            StoredCloudAnchorCollection history = JsonUtility.FromJson<StoredCloudAnchorCollection>(PlayerPrefs.GetString(persistentCloudAnchorsStorageKey));
 
             // Remove all records created more than 24 hours and update stored history.
             DateTime current = DateTime.Now;
-            history.Collection.RemoveAll(data => current.Subtract(data.CreatedTime).Days > 0);
+            history.collection.RemoveAll(data => current.Subtract(data.CreatedTime).Days > 0);
             PlayerPrefs.SetString(persistentCloudAnchorsStorageKey, JsonUtility.ToJson(history));
 
             return history;
         }
 
-        return new CloudAnchorHistoryCollection();
+        return new StoredCloudAnchorCollection();
     }
-    public void SaveCloudAnchorHistory(CloudAnchorHistory data)
+    public void SaveCloudAnchorHistory(StoredCloudAnchor data)
     {
-        CloudAnchorHistoryCollection history = LoadCloudAnchorHistory();
+        StoredCloudAnchorCollection history = LoadCloudAnchorHistory();
 
         // Sort the data from latest record to oldest record which affects the option order in
         // multiselection dropdown.
-        history.Collection.Add(data);
-        history.Collection.Sort((left, right) => right.CreatedTime.CompareTo(left.CreatedTime));
+        history.collection.Add(data);
+        history.collection.Sort((left, right) => right.CreatedTime.CompareTo(left.CreatedTime));
 
         // Remove the oldest data if the capacity exceeds storage limit.
-        if (history.Collection.Count > storageLimit)
+        if (history.collection.Count > storageLimit)
         {
-            history.Collection.RemoveRange(storageLimit, history.Collection.Count - storageLimit);
+            history.collection.RemoveRange(storageLimit, history.collection.Count - storageLimit);
         }
 
         PlayerPrefs.SetString(persistentCloudAnchorsStorageKey, JsonUtility.ToJson(history));

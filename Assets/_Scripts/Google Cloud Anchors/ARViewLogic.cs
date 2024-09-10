@@ -23,7 +23,7 @@ public class ARViewLogic : MonoBehaviour
 
     private float timeSinceStart;
     private bool isReturning;
-    private CloudAnchorHistory hostedCloudAnchor;
+    private StoredCloudAnchor hostedCloudAnchor;
     private ARAnchor anchor = null;
     private MapQualityIndicator mapQualityIndicator = null;
     private HostCloudAnchorPromise hostPromise = null;
@@ -411,8 +411,8 @@ public class ARViewLogic : MonoBehaviour
 
         if (hostResult.CloudAnchorState == CloudAnchorState.Success)
         {
-            int count = controller.LoadCloudAnchorHistory().Collection.Count;
-            hostedCloudAnchor = new CloudAnchorHistory("CloudAnchor" + count, hostResult.CloudAnchorId);
+            int count = controller.LoadCloudAnchorHistory().collection.Count;
+            hostedCloudAnchor = new StoredCloudAnchor("CloudAnchor " + count, hostResult.CloudAnchorId);
             OnAnchorHostedFinished(true, hostResult.CloudAnchorId);
         }
         else
