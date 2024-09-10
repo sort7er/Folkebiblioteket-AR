@@ -5,14 +5,14 @@ public class MapQualityBar : MonoBehaviour
 
 
     public float colorCurve;
-    public Renderer Renderer;
+    public Renderer meshRenderer;
 
-    public Color InitialColor = Color.white;
-    public Color LowQualityColor = Color.red;
-    public Color MediumQualityColor = Color.yellow;
-    public Color HighQualityColor = Color.green;
+    public Color initialColor = Color.white;
+    public Color lowQualityColor = Color.red;
+    public Color mediumQualityColor = Color.yellow;
+    public Color highQualityColor = Color.green;
 
-    private const string _varColor = "_Color";
+    private const string _materialColor = "_Color";
 
     private bool isVisited = false;
     private int state = 0;
@@ -29,6 +29,7 @@ public class MapQualityBar : MonoBehaviour
         set
         {
             isVisited = value;
+
             //Animator.SetBool(paramIsVisited, isVisited);
         }
     }
@@ -42,6 +43,7 @@ public class MapQualityBar : MonoBehaviour
         set
         {
             state = value;
+            transform.localScale = new Vector3(1, 1 + state, 1) * 0.01f;
             //Animator.SetInteger(paramQuality, state);
         }
     }
@@ -74,21 +76,21 @@ public class MapQualityBar : MonoBehaviour
     {
         // Sync map quality bar color with current state animation.
 
-        Color color = InitialColor;
+        Color color = initialColor;
         if (state == 0)
         {
-            color = Color.Lerp(InitialColor, LowQualityColor, colorCurve);
+            color = Color.Lerp(initialColor, lowQualityColor, colorCurve);
         }
         else if (state == 1)
         {
-            color = Color.Lerp(LowQualityColor, MediumQualityColor, colorCurve);
+            color = Color.Lerp(lowQualityColor, mediumQualityColor, colorCurve);
         }
         else if (state == 2)
         {
-            color = Color.Lerp(MediumQualityColor, HighQualityColor, colorCurve);
+            color = Color.Lerp(mediumQualityColor, highQualityColor, colorCurve);
         }
 
         color.a = alpha;
-        Renderer.material.SetColor(_varColor, color);
+        meshRenderer.material.SetColor(_materialColor, color);
     }
 }

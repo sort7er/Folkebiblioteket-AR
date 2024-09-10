@@ -3023,6 +3023,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sessionOrigin: {fileID: 1964602098}
   session: {fileID: 207147542}
+  extensions: {fileID: 1487923424}
   anchorManager: {fileID: 1964602100}
   planeManager: {fileID: 1964602102}
   raycastManager: {fileID: 1964602109}
@@ -4297,6 +4298,56 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Padding: {x: -8, y: -5, z: -8, w: -5}
   m_Softness: {x: 0, y: 0}
+--- !u!1 &1487923424
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1487923426}
+  - component: {fileID: 1487923425}
+  m_Layer: 0
+  m_Name: Extensions
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1487923425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1487923424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b50ad3f5d9024549b0a549c5a03a084, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Session: {fileID: 207147542}
+  SessionOrigin: {fileID: 0}
+  CameraManager: {fileID: 1375737373}
+  ARCoreExtensionsConfig: {fileID: 11400000, guid: 0f1dfda3b8b72be4b8d0d147e3ec67da,
+    type: 2}
+  CameraConfigFilter: {fileID: 0}
+--- !u!4 &1487923426
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1487923424}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 9.95467, y: 2.916753, z: 19.905226}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1521118743
 GameObject:
   m_ObjectHideFlags: 0
@@ -4867,7 +4918,8 @@ MonoBehaviour:
   controller: {fileID: 1033558404}
   uiHandler: {fileID: 1643808592}
   prefab: {fileID: 8627553688903744948, guid: da4ca6272173a9045853e63b01eac474, type: 3}
-  mapQualityIndicatorPrefab: {fileID: 0}
+  mapQualityIndicatorPrefab: {fileID: 2574283924228250381, guid: fc9d1c5170ca49946970f447487ad097,
+    type: 3}
 --- !u!1 &1656072489
 GameObject:
   m_ObjectHideFlags: 0
@@ -5487,7 +5539,6 @@ GameObject:
   - component: {fileID: 1766914626}
   - component: {fileID: 1766914625}
   - component: {fileID: 1766914624}
-  - component: {fileID: 1766914623}
   m_Layer: 5
   m_Name: DebugerCanvas
   m_TagString: Untagged
@@ -5495,23 +5546,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1766914623
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1766914622}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!114 &1766914624
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6802,7 +6836,6 @@ GameObject:
   - component: {fileID: 1964602102}
   - component: {fileID: 1964602109}
   - component: {fileID: 1964602108}
-  - component: {fileID: 1964602110}
   m_Layer: 0
   m_Name: XR Origin
   m_TagString: Untagged
@@ -6898,24 +6931,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_RaycastPrefab: {fileID: 0}
---- !u!114 &1964602110
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1964602097}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b50ad3f5d9024549b0a549c5a03a084, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Session: {fileID: 207147542}
-  SessionOrigin: {fileID: 0}
-  CameraManager: {fileID: 1375737373}
-  ARCoreExtensionsConfig: {fileID: 11400000, guid: 0f1dfda3b8b72be4b8d0d147e3ec67da,
-    type: 2}
-  CameraConfigFilter: {fileID: 0}
 --- !u!1 &1974550675
 GameObject:
   m_ObjectHideFlags: 0
@@ -7561,6 +7576,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 410087041}
   - {fileID: 832575519}
+  - {fileID: 1487923426}
   - {fileID: 207147543}
   - {fileID: 1964602099}
   - {fileID: 1521118747}

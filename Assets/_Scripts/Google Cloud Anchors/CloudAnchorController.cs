@@ -9,7 +9,7 @@ public class CloudAnchorController : MonoBehaviour
     [Header("AR Foundation")]
     public XROrigin sessionOrigin;
     public ARSession session;
-    //public ARCoreExtensions extensions;
+    public GameObject extensions;
     public ARAnchorManager anchorManager;
     public ARPlaneManager planeManager;
     public ARRaycastManager raycastManager;
@@ -65,7 +65,7 @@ public class CloudAnchorController : MonoBehaviour
     {
         ResetAllViews();
         arView.SetActive(true);
-        SetPlatformActive(true);
+        //SetPlatformActive(true);
     }
     public void SwitchToResolveMenu()
     {
@@ -75,7 +75,7 @@ public class CloudAnchorController : MonoBehaviour
 
     private void ResetAllViews()
     {
-        SetPlatformActive(false);
+        //SetPlatformActive(false);
         arView.SetActive(false);
         resolveView.SetActive(false);
         homeView.SetActive(false);
@@ -85,7 +85,7 @@ public class CloudAnchorController : MonoBehaviour
     {
         sessionOrigin.gameObject.SetActive(active);
         session.gameObject.SetActive(active);
-        //extensions.gameObject.SetActive(active);
+        extensions.SetActive(active);
     }
     #endregion
 
