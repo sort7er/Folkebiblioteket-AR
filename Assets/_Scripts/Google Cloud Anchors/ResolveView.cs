@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ResolveMenu : MonoBehaviour
+public class ResolveView : MonoBehaviour
 {
     public CloudAnchorController controller;
     //public MultiselectionDropdown multiselection;
