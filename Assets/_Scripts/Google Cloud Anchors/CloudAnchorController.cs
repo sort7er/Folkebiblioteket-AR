@@ -65,7 +65,7 @@ public class CloudAnchorController : MonoBehaviour
     {
         ResetAllViews();
         arView.SetActive(true);
-        //SetPlatformActive(true);
+        SetPlatformActive(true);
     }
     public void SwitchToResolveMenu()
     {
@@ -75,7 +75,7 @@ public class CloudAnchorController : MonoBehaviour
 
     private void ResetAllViews()
     {
-        //SetPlatformActive(false);
+        SetPlatformActive(false);
         arView.SetActive(false);
         resolveView.SetActive(false);
         homeView.SetActive(false);

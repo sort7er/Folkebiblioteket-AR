@@ -65,8 +65,8 @@ public class Debuger : MonoBehaviour
     {
         prefab.gameObject.SetActive(true);
         prefab.text = log;
-        prefab.transform.parent = null;
-        prefab.transform.parent = textContainer;
+        prefab.transform.SetParent(null);
+        prefab.transform.SetParent(textContainer);
 
         if (type == LogType.Error)
         {
