@@ -133,6 +133,7 @@ public class CloudAnchorController : MonoBehaviour
     }
     //public void Update()
     //{
+
     //    // On home page, pressing 'back' button quits the app.
     //    // Otherwise, returns to home page.
     //    if (Input.GetKeyUp(KeyCode.Escape))

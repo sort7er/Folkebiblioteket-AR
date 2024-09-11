@@ -6573,11 +6573,11 @@ RectTransform:
   - {fileID: 2078615313}
   m_Father: {fileID: 1766914626}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 250}
-  m_Pivot: {x: 0.5, y: 1}
+  m_SizeDelta: {x: 0, y: 500}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1964195585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6592,7 +6592,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textPrefab: {fileID: 2229125579499874301, guid: 95d3a4a452c691d488460d9b1149f4ea,
     type: 3}
+  textTallPrefab: {fileID: 1273402540209974255, guid: c8732eed339ae7f4c81a8b1a81eb9e9b,
+    type: 3}
   textContainer: {fileID: 2078615313}
+  includeStack: 0
 --- !u!114 &1964195586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6619,7 +6622,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.1792453, g: 0.1792453, b: 0.1792453, a: 0.2}
+  m_Color: {r: 0.1792453, g: 0.1792453, b: 0.1792453, a: 0.7529412}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -7445,12 +7448,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 0
-    m_Right: 0
+    m_Left: 20
+    m_Right: 20
     m_Top: 0
     m_Bottom: 0
-  m_ChildAlignment: 6
-  m_Spacing: 0
+  m_ChildAlignment: 0
+  m_Spacing: 20
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 1

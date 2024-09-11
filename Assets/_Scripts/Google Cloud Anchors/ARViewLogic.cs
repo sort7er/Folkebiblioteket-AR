@@ -147,6 +147,7 @@ public class ARViewLogic : MonoBehaviour
 
     public void Update()
     {
+
         // Give ARCore some time to prepare for hosting or resolving.
         if (timeSinceStart < startPrepareTime)
         {
