@@ -76,6 +76,10 @@ public class Debuger : MonoBehaviour
         {
             prefab.color = Color.yellow;
         }
+        else
+        {
+            prefab.color = Color.white;
+        }
     }
 
 

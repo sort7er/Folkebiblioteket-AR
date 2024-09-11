@@ -12,8 +12,6 @@ public class MapQualityBar : MonoBehaviour
     public Color mediumQualityColor = Color.yellow;
     public Color highQualityColor = Color.green;
 
-    private const string _materialColor = "_Color";
-
     private bool isVisited = false;
     private int state = 0;
     private float alpha = 1.0f;
@@ -91,6 +89,6 @@ public class MapQualityBar : MonoBehaviour
         }
 
         color.a = alpha;
-        meshRenderer.material.SetColor(_materialColor, color);
+        meshRenderer.material.color = color;
     }
 }

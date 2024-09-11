@@ -6,7 +6,6 @@ using UnityEngine.XR.ARSubsystems;
 public class MapQualityIndicator : MonoBehaviour
 {
     public MapQualityBar mapQualityBarPrefab;
-    //public CircleRenderer circleRenderer;
     [Range(0,360)]
     public float range = 150;
     public float radius = 0.1f;
@@ -134,45 +133,33 @@ public class MapQualityIndicator : MonoBehaviour
             transform.TransformVector(-Vector3.forward);
 
         DrawBars();
-        DrawRing();
 
         gameObject.SetActive(true);
     }
 
-    private void DrawRing()
-    {
-        //CircleRenderer.DrawArc(_centerDir, Radius, Range + (2 * _circleFadingRange));
-    }
+
 
     private void DrawBars()
     {
         // Place a quality bar at the center position.
 
-        Vector3 basePos = transform.position;
-        Vector3 position = centerDir * radius;
-        var rotation = Quaternion.AngleAxis(0, Vector3.up);
 
-        AddBar(basePos, position, rotation);
-
-        for (float deltaAngle = barSpacing; deltaAngle < range / 2; deltaAngle += barSpacing)
+        for (float deltaAngle = barSpacing; deltaAngle < range; deltaAngle += barSpacing)
         {
             // Place a quality bar at the left and right side.
-            DrawBar(deltaAngle, basePos);
-            DrawBar(-deltaAngle, basePos);
+            DrawBar(deltaAngle);
+            DrawBar(-deltaAngle);
         }
     }
 
-    private void DrawBar(float angle, Vector3 basePos)
+    private void DrawBar(float angle)
     {
         Quaternion rotation = Quaternion.AngleAxis(angle, Vector3.up);
         Vector3 position = rotation * centerDir * radius;
-        AddBar(basePos, position, rotation);
-    }
-    private void AddBar(Vector3 basePos, Vector3 position, Quaternion rotation)
-    {
-        MapQualityBar qualityBar = Instantiate(mapQualityBarPrefab, basePos + position, rotation, transform);
+        MapQualityBar qualityBar = Instantiate(mapQualityBarPrefab, transform.position + position, rotation, transform);
         mapQualityBars.Add(qualityBar);
     }
+
     private bool IsLookingAtBar(MapQualityBar bar)
     {
         // Check whether the bar is inside camera's view:
