@@ -93,6 +93,7 @@ public class CloudAnchorController : MonoBehaviour
 
     public StoredCloudAnchorCollection LoadCloudAnchorHistory()
     {
+        Debug.Log("Load");
         if (PlayerPrefs.HasKey(persistentCloudAnchorsStorageKey))
         {
 
@@ -114,6 +115,7 @@ public class CloudAnchorController : MonoBehaviour
     }
     public void SaveCloudAnchorHistory(StoredCloudAnchor data)
     {
+        Debug.Log("save");
         StoredCloudAnchorCollection history = LoadCloudAnchorHistory();
 
         // Sort the data from latest record to oldest record which affects the option order in
@@ -127,7 +129,10 @@ public class CloudAnchorController : MonoBehaviour
             history.collection.RemoveRange(storageLimit, history.collection.Count - storageLimit);
         }
 
+        Debug.Log("Set prefs now");
+
         PlayerPrefs.SetString(persistentCloudAnchorsStorageKey, JsonUtility.ToJson(history));
+        Debug.Log("Prefs set");
     }
 
     #endregion
