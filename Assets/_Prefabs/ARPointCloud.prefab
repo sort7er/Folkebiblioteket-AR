@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 5624453243332030621}
   - component: {fileID: 7420935982016662185}
   - component: {fileID: 803720011497207670}
+  - component: {fileID: 444956457191905745}
+  - component: {fileID: 2239375535099616730}
   m_Layer: 0
   m_Name: ARPointCloud
   m_TagString: Untagged
@@ -4844,3 +4846,28 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!114 &444956457191905745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3166792768566169675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afcab4e7938ae724a8a59ecac3580761, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_DestroyOnRemoval: 1
+--- !u!114 &2239375535099616730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3166792768566169675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 468ea6c98cd64494abbc2c2f34d6cde2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

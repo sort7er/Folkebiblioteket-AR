@@ -472,6 +472,7 @@ public class ARViewLogic : MonoBehaviour
 
     private void UpdatePlaneVisibility(bool visible)
     {
+        controller.planeManager.enabled = visible;
         foreach (ARPlane plane in controller.planeManager.trackables)
         {
             plane.gameObject.SetActive(visible);
