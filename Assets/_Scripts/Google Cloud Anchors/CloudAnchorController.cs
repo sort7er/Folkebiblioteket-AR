@@ -102,14 +102,24 @@ public class CloudAnchorController : MonoBehaviour
             // Remove all records created more than 24 hours and update stored history.
             DateTime current = DateTime.Now;
 
-            Debug.Log(history.collection[0].Name);
-            Debug.Log(history.collection[0].Id);
-            Debug.Log(history.collection[0].CreatedTime);
 
-            history.collection.RemoveAll(data => current.Subtract(data.CreatedTime).Days > 0);
+            //Precation
+            for(int i = 0; i < history.collection.Count; i++)
+            {
+                if (history.collection[i] == null)
+                {
+                    history.collection.Remove(history.collection[i]);
+                    Debug.Log("Removed " + history.collection[i]);
+                }
+            }
 
-            Debug.Log(history + " 2");
-            PlayerPrefs.SetString(persistentCloudAnchorsStorageKey, JsonUtility.ToJson(history));
+            if(history.collection.Count > 0)
+            {
+                history.collection.RemoveAll(data => current.Subtract(data.CreatedTime).Days > 0);
+
+                Debug.Log(history + " 2");
+                PlayerPrefs.SetString(persistentCloudAnchorsStorageKey, JsonUtility.ToJson(history));
+            }
 
             return history;
         }
