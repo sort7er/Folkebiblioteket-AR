@@ -23,16 +23,18 @@ public class ARViewLogic : MonoBehaviour
 
     private float timeSinceStart;
     private bool isReturning;
-    private StoredCloudAnchor hostedCloudAnchor;
     private ARAnchor anchor = null;
     private MapQualityIndicator mapQualityIndicator = null;
-    private HostCloudAnchorPromise hostPromise = null;
-    private HostCloudAnchorResult hostResult = null;
-    private IEnumerator hostCoroutine = null;
-    private List<ResolveCloudAnchorPromise> resolvePromises = new List<ResolveCloudAnchorPromise>();
-    private List<ResolveCloudAnchorResult> resolveResults = new List<ResolveCloudAnchorResult>();
-    private List<IEnumerator> resolveCoroutines = new List<IEnumerator>();
+    private HostCloudAnchorPromise hostPromise;
+    private HostCloudAnchorResult hostResult;
+    private IEnumerator hostCoroutine;
 
+    private ResolveCloudAnchorPromise resolvePromise;
+    private ResolveCloudAnchorResult resolveResult;
+
+    //private List<IEnumerator> resolveCoroutines = new List<IEnumerator>();
+
+    private string anchorId;
 
 
 
@@ -43,18 +45,11 @@ public class ARViewLogic : MonoBehaviour
 
 
     #region Buttons
-    public void OnSaveButtonClicked()
-    {
-        hostedCloudAnchor.Name = uiHandler.nameField.text;
-        controller.SaveCloudAnchorHistory(hostedCloudAnchor);
 
-        uiHandler.SaveButtonClicked();
-        Debuger.Instance.DebugMessage("Saved Cloud Anchor: " + hostedCloudAnchor.Name);
-    }
     public void OnShareButtonClicked()
     {
-        GUIUtility.systemCopyBuffer = hostedCloudAnchor.Id;
-        Debuger.Instance.DebugMessage("Copied cloud id: " + hostedCloudAnchor.Id);
+        GUIUtility.systemCopyBuffer = anchorId;
+        Debuger.Instance.DebugMessage("Copied cloud id: " + anchorId);
     }
 
     #endregion
@@ -69,9 +64,9 @@ public class ARViewLogic : MonoBehaviour
         hostPromise = null;
         hostResult = null;
         hostCoroutine = null;
-        resolvePromises.Clear();
-        resolveResults.Clear();
-        resolveCoroutines.Clear();
+        resolvePromise = null;
+        resolveResult = null;
+
         uiHandler.WhenEnabled();
 
         UpdatePlaneVisibility(true);
@@ -91,6 +86,8 @@ public class ARViewLogic : MonoBehaviour
 
     public void OnDisable()
     {
+        // debug this afterwards
+
         if (mapQualityIndicator != null)
         {
             Destroy(mapQualityIndicator.gameObject);
@@ -99,48 +96,46 @@ public class ARViewLogic : MonoBehaviour
 
         if (anchor != null)
         {
+
             Destroy(anchor.gameObject);
             anchor = null;
         }
 
         if (hostCoroutine != null)
         {
+
             StopCoroutine(hostCoroutine);
+            hostCoroutine = null;
         }
 
-        hostCoroutine = null;
 
         if (hostPromise != null)
         {
+            Debug.Log("d");
             hostPromise.Cancel();
             hostPromise = null;
         }
 
-        hostResult = null;
-
-        foreach (IEnumerator coroutine in resolveCoroutines)
+        if (hostResult != null)
         {
-            StopCoroutine(coroutine);
+            Debug.Log("e");
+            hostResult = null;
         }
 
-        resolveCoroutines.Clear();
-
-        foreach (var promise in resolvePromises)
+        if(resolvePromise != null)
         {
-            promise.Cancel();
+            Debug.Log("f");
+            resolvePromise.Cancel();
+            resolvePromise = null;
         }
 
-        resolvePromises.Clear();
-
-        foreach (var result in resolveResults)
+        if(resolveResult != null && resolveResult.Anchor != null)
         {
-            if (result.Anchor != null)
-            {
-                Destroy(result.Anchor.gameObject);
-            }
+            Debug.Log("g");
+            Destroy(resolveResult.Anchor.gameObject);
         }
 
-        resolveResults.Clear();
+            Debug.Log("h");
         UpdatePlaneVisibility(false);
     }
     #endregion
@@ -220,7 +215,7 @@ public class ARViewLogic : MonoBehaviour
 
             case CloudAnchorController.ApplicationMode.Resolving:
                 uiHandler.SetInstructionText("Look at the location you expect to see the AR experience appear.");
-                Debuger.Instance.SendMessage($"Attempting to resolve {controller.resolvingSet.Count} anchors...");
+                Debuger.Instance.SendMessage($"Attempting to resolve anchor...");
                 return;
 
             default:
@@ -249,16 +244,17 @@ public class ARViewLogic : MonoBehaviour
             ReturnToHomePage($"ARCore encountered an error state {ARSession.state}. Please start the app again.");
         }
     }
-    private void ResolvingCloudAnchors()
+    private async void ResolvingCloudAnchors()
     {
         // No Cloud Anchor for resolving.
-        if (controller.resolvingSet.Count == 0)
+
+        if (controller.LoadCurrentCloudAnchorId() == null)
         {
             return;
         }
 
         // There are pending or finished resolving tasks.
-        if (resolvePromises.Count > 0 || resolveResults.Count > 0)
+        if (resolvePromise != null || resolveResult != null)
         {
             return;
         }
@@ -269,27 +265,27 @@ public class ARViewLogic : MonoBehaviour
             return;
         }
 
-        string resolvingSetArray = string.Join(",", new List<string>(controller.resolvingSet).ToArray());
 
-        Debuger.Instance.SendMessage($"Attempting to resolve {controller.resolvingSet.Count} Cloud Anchor(s): {resolvingSetArray}");
 
-        foreach (string cloudId in controller.resolvingSet)
+        resolvePromise = controller.anchorManager.ResolveCloudAnchorAsync(anchorId);
+        
+        if(resolvePromise == null)
         {
-            var promise = controller.anchorManager.ResolveCloudAnchorAsync(cloudId);
-            if (promise.State == PromiseState.Done)
-            {
-                Debuger.Instance.DebugError("Faild to resolve Cloud Anchor " + cloudId);
-                OnAnchorResolvedFinished(false, cloudId);
-            }
-            else
-            {
-                resolvePromises.Add(promise);
-                var coroutine = ResolveAnchor(cloudId, promise);
-                StartCoroutine(coroutine);
-            }
+            Debug.Log(resolvePromise.State + " is the state");
         }
 
-        controller.resolvingSet.Clear();
+        if (resolvePromise.State == PromiseState.Done)
+        {
+            Debug.Log(4);
+            Debuger.Instance.DebugError("Failed to resolve Cloud Anchor " + anchorId);
+            OnAnchorResolvedFinished(false, anchorId);
+        }
+        else
+        {
+            Debug.Log(5);
+            var coroutine = ResolveAnchor(anchorId, resolvePromise);
+            StartCoroutine(coroutine);
+        }
     }
 
     private void PerformHitTest(Vector2 touchPos)
@@ -420,9 +416,8 @@ public class ARViewLogic : MonoBehaviour
 
         if (hostResult.CloudAnchorState == CloudAnchorState.Success)
         {
-            int count = controller.LoadCloudAnchorHistory().collection.Count;
-            hostedCloudAnchor = new StoredCloudAnchor("CloudAnchor " + count, hostResult.CloudAnchorId);
-            OnAnchorHostedFinished(true, hostResult.CloudAnchorId);
+            anchorId = hostResult.CloudAnchorId;
+            OnAnchorHostedFinished(true, anchorId);
         }
         else
         {
@@ -431,19 +426,27 @@ public class ARViewLogic : MonoBehaviour
     }
     private IEnumerator ResolveAnchor(string cloudId, ResolveCloudAnchorPromise promise)
     {
-        yield return promise;
-        var result = promise.Result;
-        resolvePromises.Remove(promise);
-        resolveResults.Add(result);
+        Debug.Log(7);
 
-        if (result.CloudAnchorState == CloudAnchorState.Success)
+        Debug.Log(promise);
+
+        yield return promise;
+
+        Debug.Log(8);
+
+        resolveResult = promise.Result;      
+        resolvePromise = null;
+
+        if (resolveResult.CloudAnchorState == CloudAnchorState.Success)
         {
+        Debug.Log(9);
             OnAnchorResolvedFinished(true, cloudId);
-            Instantiate(prefab, result.Anchor.transform);
+            Instantiate(prefab, resolveResult.Anchor.transform);
         }
         else
         {
-            OnAnchorResolvedFinished(false, cloudId, result.CloudAnchorState.ToString());
+        Debug.Log(10);
+            OnAnchorResolvedFinished(false, cloudId, resolveResult.CloudAnchorState.ToString());
         }
     }
     #endregion
@@ -454,7 +457,8 @@ public class ARViewLogic : MonoBehaviour
         if (success)
         {
             uiHandler.SetInstructionText("Finish!");
-            uiHandler.SuccessfullHosting(hostedCloudAnchor.Name);
+            uiHandler.SuccessfullHosting(anchorId);
+            controller.SaveCurrentCloudAnchorId(anchorId);
             Debuger.Instance.SendMessage($"Succeed to host the Cloud Anchor: {response}");
         }
         else

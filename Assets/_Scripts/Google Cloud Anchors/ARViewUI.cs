@@ -1,4 +1,3 @@
-using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,19 +7,11 @@ using UnityEngine.XR.ARSubsystems;
 public class ARViewUI : MonoBehaviour
 {
     public GameObject instructionBar;
-    public GameObject namePanel;
-    public GameObject inputFieldWarning;
-
-    public TMP_InputField nameField;
     public TextMeshProUGUI instructionText;
     public TextMeshProUGUI trackingHelperText;
-    public TextMeshProUGUI saveButtonText;
-    public Button saveButton;
     public Button shareButton;
 
-    private Regex regex;
     private AndroidJavaClass versionInfo;
-    private Color activeColor;
 
     private const int androidSSDKVesion = 31;
 
@@ -34,48 +25,27 @@ public class ARViewUI : MonoBehaviour
 
     private void Awake()
     {
-        activeColor = saveButtonText.color;
-        regex = new Regex("^[a-zA-Z0-9-_]*$");
         versionInfo = new AndroidJavaClass("android.os.Build$VERSION");
     }
     public void WhenEnabled()
     {
         instructionBar.SetActive(true);
-        namePanel.SetActive(false);
-        inputFieldWarning.SetActive(false);
         shareButton.gameObject.SetActive(false);
     }
 
-    public void OnInputFieldValueChanged(string inputString)
-    {
-        inputFieldWarning.SetActive(!regex.IsMatch(inputString));
-        SetSaveButtonActive(!inputFieldWarning.activeSelf && inputString.Length > 0);
-    }
     public void SetInstructionText(string text)
     {
         instructionText.text = text;
     }
-    public void SetSaveButtonActive(bool active)
-    {
-        saveButton.enabled = active;
-        saveButtonText.color = active ? activeColor : Color.gray;
-    }
+
     public void SuccessfullHosting(string name)
     {
-        nameField.text = name;
-        namePanel.SetActive(true);
-        SetSaveButtonActive(true);
         Invoke(nameof(DoHideInstructionBar), 1.5f);
+        shareButton.gameObject.SetActive(true);
     }
     public void DoHideInstructionBar()
     {
         instructionBar.SetActive(false);
-    }
-
-    public void SaveButtonClicked()
-    {
-        shareButton.gameObject.SetActive(true);
-        namePanel.SetActive(false);
     }
 
     public void DisplayTrackingHelperMessage(bool isReturning)

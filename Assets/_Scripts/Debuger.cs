@@ -48,13 +48,13 @@ public class Debuger : MonoBehaviour
     }
     public void DebugError(string message)
     {
-        Debug.LogError(message);
+        Debug.Log(message);
     }
     public void ConsolePrint(string logString, string stackTrace, LogType type)
     {
         SetTextPrefab(GetNextText(), logString, type);
 
-        if(includeStack)
+        if(includeStack && type != LogType.Log)
         {
             SetTextPrefab(GetNextTallText(), stackTrace, type);
         }
@@ -76,7 +76,7 @@ public class Debuger : MonoBehaviour
         {
             prefab.color = Color.yellow;
         }
-        else
+        else if(type == LogType.Log) 
         {
             prefab.color = Color.white;
         }

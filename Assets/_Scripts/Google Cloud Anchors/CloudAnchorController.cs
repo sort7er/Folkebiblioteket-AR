@@ -1,8 +1,6 @@
-using System.Collections.Generic;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine;
 using Unity.XR.CoreUtils;
-using System;
 
 public class CloudAnchorController : MonoBehaviour
 {
@@ -20,10 +18,9 @@ public class CloudAnchorController : MonoBehaviour
     public GameObject arView;
 
     [HideInInspector] public ApplicationMode mode = ApplicationMode.Ready;
-    public HashSet<string> resolvingSet = new HashSet<string>();
 
-    private const string persistentCloudAnchorsStorageKey = "PersistentCloudAnchors";
-    private const int storageLimit = 40;
+    private const string persistentCloudAnchorIdKey = "anchorId";
+
 
     public enum ApplicationMode
     {
@@ -41,7 +38,10 @@ public class CloudAnchorController : MonoBehaviour
     public void Awake()
     {
         SwitchToHomePage();
+
+
     }
+
 
     #region Buttons
     public void OnHostButtonClicked()
@@ -62,7 +62,6 @@ public class CloudAnchorController : MonoBehaviour
     {
         ResetAllViews();
         mode = ApplicationMode.Ready;
-        resolvingSet.Clear();
         homeView.SetActive(true);
     }
     public void SwitchToARView()
@@ -95,47 +94,21 @@ public class CloudAnchorController : MonoBehaviour
 
     #region CloudAnchorHistory
 
-    public StoredCloudAnchorCollection LoadCloudAnchorHistory()
+    public string LoadCurrentCloudAnchorId()
     {
-        Debug.Log("Load");
-        if (PlayerPrefs.HasKey(persistentCloudAnchorsStorageKey))
+        if (PlayerPrefs.HasKey(persistentCloudAnchorIdKey))
         {
-
-            StoredCloudAnchorCollection history = JsonUtility.FromJson<StoredCloudAnchorCollection>(PlayerPrefs.GetString(persistentCloudAnchorsStorageKey));
-            Debug.Log(history.collection.Count + " number of files");
-
-            // Remove all records created more than 24 hours and update stored history.
-            DateTime current = DateTime.Now;
-
-            history.collection.RemoveAll(data => current.Subtract(data.CreatedTime).Days > 0);
-
-            PlayerPrefs.SetString(persistentCloudAnchorsStorageKey, JsonUtility.ToJson(history));
-
-            return history;
+            return PlayerPrefs.GetString(persistentCloudAnchorIdKey);
         }
-
-        return new StoredCloudAnchorCollection();
+        else
+        {
+            return null;
+        }
     }
-    public void SaveCloudAnchorHistory(StoredCloudAnchor data)
+
+    public void SaveCurrentCloudAnchorId(string newId)
     {
-        Debug.Log("save");
-        StoredCloudAnchorCollection history = LoadCloudAnchorHistory();
-
-        // Sort the data from latest record to oldest record which affects the option order in
-        // multiselection dropdown.
-        history.collection.Add(data);
-        history.collection.Sort((left, right) => right.CreatedTime.CompareTo(left.CreatedTime));
-
-        // Remove the oldest data if the capacity exceeds storage limit.
-        if (history.collection.Count > storageLimit)
-        {
-            history.collection.RemoveRange(storageLimit, history.collection.Count - storageLimit);
-        }
-
-        Debug.Log("Set prefs now");
-
-        PlayerPrefs.SetString(persistentCloudAnchorsStorageKey, JsonUtility.ToJson(history));
-        Debug.Log("Prefs set");
+        PlayerPrefs.SetString(persistentCloudAnchorIdKey, newId);
     }
 
     #endregion
