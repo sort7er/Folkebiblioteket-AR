@@ -43,6 +43,7 @@ public class ARViewUI : MonoBehaviour
         Invoke(nameof(DoHideInstructionBar), 1.5f);
         shareButton.gameObject.SetActive(true);
     }
+
     public void DoHideInstructionBar()
     {
         instructionBar.SetActive(false);

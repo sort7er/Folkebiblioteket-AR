@@ -11,9 +11,9 @@ public class ARViewLogic : MonoBehaviour
 {
     public CloudAnchorController controller;
     public ARViewUI uiHandler;
-    public GameObject prefab;
+    public Church churchPrefab;
     public MapQualityIndicator mapQualityIndicatorPrefab;
-
+    public ChangeTransView changeTrans;
 
 
 
@@ -130,6 +130,8 @@ public class ARViewLogic : MonoBehaviour
         {
             Destroy(resolveResult.Anchor.gameObject);
         }
+
+        changeTrans.ShowChangeButton(false);
 
         UpdatePlaneVisibility(false);
     }
@@ -308,7 +310,7 @@ public class ARViewLogic : MonoBehaviour
 
         if (anchor != null)
         {
-            Instantiate(prefab, anchor.transform);
+            Instantiate(churchPrefab, anchor.transform);
 
             // Attach map quality indicator to this anchor.
             mapQualityIndicator = Instantiate(mapQualityIndicatorPrefab, anchor.transform);
@@ -424,7 +426,10 @@ public class ARViewLogic : MonoBehaviour
         if (resolveResult.CloudAnchorState == CloudAnchorState.Success)
         {
             OnAnchorResolvedFinished(true, cloudId);
-            Instantiate(prefab, resolveResult.Anchor.transform);
+            Church church = Instantiate(churchPrefab, resolveResult.Anchor.transform);
+
+            changeTrans.SetChurch(church);
+            changeTrans.ShowChangeButton(true);
         }
         else
         {
@@ -467,10 +472,11 @@ public class ARViewLogic : MonoBehaviour
 
     private void UpdatePlaneVisibility(bool visible)
     {
-        foreach (ARPlane plane in controller.planeManager.trackables)
-        {
-            plane.gameObject.SetActive(visible);
-        }
+        //controller.planeManager.enabled= visible;
+        //foreach (ARPlane plane in controller.planeManager.trackables)
+        //{
+        //    plane.gameObject.SetActive(visible);
+        //}
     }
   
     private void ReturnToHomePage(string reason)
