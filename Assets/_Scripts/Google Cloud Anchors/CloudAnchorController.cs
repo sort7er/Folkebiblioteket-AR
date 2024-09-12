@@ -38,6 +38,10 @@ public class CloudAnchorController : MonoBehaviour
             return sessionOrigin.Camera;
         }
     }
+    public void Awake()
+    {
+        SwitchToHomePage();
+    }
 
     #region Buttons
     public void OnHostButtonClicked()
@@ -100,6 +104,8 @@ public class CloudAnchorController : MonoBehaviour
             StoredCloudAnchorCollection history = JsonUtility.FromJson<StoredCloudAnchorCollection>(PlayerPrefs.GetString(persistentCloudAnchorsStorageKey));
             Debug.Log(history.collection.Count + " number of files");
 
+            Debug.Log(history.collection[0].Id);
+
             // Remove all records created more than 24 hours and update stored history.
             DateTime current = DateTime.Now;
 
@@ -137,10 +143,7 @@ public class CloudAnchorController : MonoBehaviour
 
     #endregion
 
-    public void Awake()
-    {
-        SwitchToHomePage();
-    }
+
     //public void Update()
     //{
 

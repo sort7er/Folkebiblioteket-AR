@@ -180,21 +180,29 @@ public class ARViewLogic : MonoBehaviour
             // Perform hit test and place an anchor on the hit test result.
             if (anchor == null)
             {
-                // If the player has not touched the screen then the update is complete.
-                Touch touch;
-                if (Input.touchCount < 1 || (touch = Input.GetTouch(0)).phase != TouchPhase.Began)
-                {
-                    return;
-                }
 
-                // Ignore the touch if it's pointing on UI objects.
-                if (EventSystem.current.IsPointerOverGameObject(touch.fingerId))
+                if(Input.GetMouseButtonDown(0))
                 {
-                    return;
+                    PerformHitTest(Input.mousePosition);
                 }
+                else
+                {
+                    // If the player has not touched the screen then the update is complete.
+                    Touch touch;
+                    if (Input.touchCount < 1 || (touch = Input.GetTouch(0)).phase != TouchPhase.Began)
+                    {
+                        return;
+                    }
 
-                // Perform hit test and place a pawn object.
-                PerformHitTest(touch.position);
+                    // Ignore the touch if it's pointing on UI objects.
+                    if (EventSystem.current.IsPointerOverGameObject(touch.fingerId))
+                    {
+                        return;
+                    }
+
+                    // Perform hit test and place a pawn object.
+                    PerformHitTest(touch.position);
+                }
             }
 
             HostingCloudAnchor();

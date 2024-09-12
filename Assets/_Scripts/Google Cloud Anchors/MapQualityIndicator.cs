@@ -64,7 +64,6 @@ public class MapQualityIndicator : MonoBehaviour
         // Play fading animation.
         if (ReachTopviewAngle)
         {
-            Debuger.Instance.SendMessage(1.ToString());
             // Fading animation finished.
             if (fadingTimer >= fadingDuration)
             {
@@ -80,12 +79,10 @@ public class MapQualityIndicator : MonoBehaviour
             fadingTimer += Time.deltaTime;
             SetAplha();
 
-            Debuger.Instance.SendMessage(2d.ToString());
             return;
         }
         else if (fadingTimer > 0)
         {
-            Debuger.Instance.SendMessage(3d.ToString());
             fadingTimer -= Time.deltaTime;
             SetAplha();
         }
