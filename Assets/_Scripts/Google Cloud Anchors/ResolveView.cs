@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
@@ -42,16 +41,6 @@ public class ResolveView : MonoBehaviour
     {
         controller.resolvingSet.Clear();
 
-        //List<int> selectedIndex = multiselection.selectedValues;
-
-        //if(selectedIndex.Count > 0 )
-        //{
-        //    for (int i = 0; i < selectedIndex.Count; i++)
-        //    {
-        //        controller.resolvingSet.Add(history.collection[i].Id);
-        //    }
-        //}
-
         if(!warning.activeSelf && inputField.text.Length > 0)
         {
             string[] inputIDs = inputField.text.Split(",");
@@ -68,6 +57,17 @@ public class ResolveView : MonoBehaviour
     {
         resolveButtonImage.color = active ? activeColor : Color.grey;
         resolveButton.enabled = active;
+    }
+    public void OnEnable()
+    {
+        SetButtonActive(false);
+        warning.SetActive(false);
+        inputField.text = string.Empty;
+        history = controller.LoadCloudAnchorHistory();
+    }
+    public void OnDisable()
+    {
+        history.collection.Clear();
     }
 
 }

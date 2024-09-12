@@ -104,14 +104,11 @@ public class CloudAnchorController : MonoBehaviour
             StoredCloudAnchorCollection history = JsonUtility.FromJson<StoredCloudAnchorCollection>(PlayerPrefs.GetString(persistentCloudAnchorsStorageKey));
             Debug.Log(history.collection.Count + " number of files");
 
-            Debug.Log(history.collection[0].Id);
-
             // Remove all records created more than 24 hours and update stored history.
             DateTime current = DateTime.Now;
 
             history.collection.RemoveAll(data => current.Subtract(data.CreatedTime).Days > 0);
 
-            Debug.Log(history + " 2");
             PlayerPrefs.SetString(persistentCloudAnchorsStorageKey, JsonUtility.ToJson(history));
 
             return history;
