@@ -36,7 +36,7 @@ public class ARCloudAnchorExperienceManager : MonoBehaviour
             if (timePassedAfterPlanesDetected <= maxScanningAreaTime)
             {
                 timePassedAfterPlanesDetected += Time.deltaTime * 1.0f;
-                Debuger.Instance.DebugMessage($"Experience starts in {maxScanningAreaTime - timePassedAfterPlanesDetected} sec(s)");
+                Debug.Log($"Experience starts in {maxScanningAreaTime - timePassedAfterPlanesDetected} sec(s)");
             }
             else
             {
@@ -56,7 +56,8 @@ public class ARCloudAnchorExperienceManager : MonoBehaviour
 
     private void Activate()
     {
-        Debuger.Instance.DebugMessage("Activate AR Cloud Anchor Experience");
+
+        Debug.Log("Activate AR Cloud Anchor Experience");
         OnInitialized?.Invoke();
         Initialized = true;
         AllowCloudAnchorDelay = false;
@@ -66,7 +67,7 @@ public class ARCloudAnchorExperienceManager : MonoBehaviour
 
     public void Restart()
     {
-        Debuger.Instance.DebugMessage("Restart AR Cloud Anchor Experience");
+        Debug.Log("Restart AR Cloud Anchor Experience");
         OnRestarted?.Invoke();
         Initialized = false;
         AllowCloudAnchorDelay = true;

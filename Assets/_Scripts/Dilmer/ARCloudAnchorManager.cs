@@ -29,16 +29,16 @@ public class ARCloudAnchorManager : MonoBehaviour
     }
     public void HostAnchor()
     {
-        Debuger.Instance.DebugMessage("HostAnchor call in progress");
+        Debug.Log("HostAnchor call in progress");
         FeatureMapQuality quality = anchorManager.EstimateFeatureMapQualityForHosting(GetCameraPose());
 
-        Debuger.Instance.DebugMessage($"Feature Map Quality is: {quality}");
+        Debug.Log($"Feature Map Quality is: {quality}");
 
         cloudAnchor = anchorManager.HostCloudAnchor(pendingHostAnchor, 1);
 
         if(cloudAnchor == null)
         {
-            Debuger.Instance.DebugError($"Unable to host cloud anchor: {pendingHostAnchor}");
+            Debug.Log($"Unable to host cloud anchor: {pendingHostAnchor}");
         }
         else
         {
@@ -47,13 +47,13 @@ public class ARCloudAnchorManager : MonoBehaviour
     }
     public void Resolve()
     {
-        Debuger.Instance.DebugMessage("Resolve call in progress");
+        Debug.Log("Resolve call in progress");
 
         cloudAnchor = anchorManager.ResolveCloudAnchorId(anchorIdToResolve);
 
         if (cloudAnchor == null)
         {
-            Debuger.Instance.DebugError($"Unable to resolve cloud anchor: {anchorIdToResolve}");
+            Debug.Log($"Unable to resolve cloud anchor: {anchorIdToResolve}");
         }
         else
         {
@@ -71,7 +71,7 @@ public class ARCloudAnchorManager : MonoBehaviour
         }
         else if(cloudAnchorState != CloudAnchorState.TaskInProgress)
         {
-            Debuger.Instance.DebugError($"Error while hosting cloud anchor: {cloudAnchorState}");
+            Debug.Log($"Error while hosting cloud anchor: {cloudAnchorState}");
             anchorHostInProgress = false;
         }
     }
@@ -86,7 +86,7 @@ public class ARCloudAnchorManager : MonoBehaviour
         }
         else if (cloudAnchorState != CloudAnchorState.TaskInProgress)
         {
-            Debuger.Instance.DebugError($"Error while resolving cloud anchor: {cloudAnchorState}");
+            Debug.Log($"Error while resolving cloud anchor: {cloudAnchorState}");
             anchorHostInProgress = false;
         }
     }
@@ -107,7 +107,7 @@ public class ARCloudAnchorManager : MonoBehaviour
 
             if (!string.IsNullOrEmpty(anchorIdToResolve))
             {
-                Debuger.Instance.DebugError($"Resolving anchor ID: {anchorIdToResolve}");
+                Debug.Log($"Resolving anchor ID: {anchorIdToResolve}");
                 CheckResolveProgress();
             }
         }

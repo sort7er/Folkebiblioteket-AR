@@ -41,15 +41,6 @@ public class Debuger : MonoBehaviour
             tallTextElements[i].gameObject.SetActive(false);
         }
     }
-
-    public void DebugMessage(string message)
-    {
-        Debug.Log(message);
-    }
-    public void DebugError(string message)
-    {
-        Debug.Log(message);
-    }
     public void ConsolePrint(string logString, string stackTrace, LogType type)
     {
         SetTextPrefab(GetNextText(), logString, type);

@@ -725,6 +725,115 @@ RectTransform:
   m_AnchoredPosition: {x: -20, y: 0}
   m_SizeDelta: {x: 160, y: 60}
   m_Pivot: {x: 1, y: 0.5}
+--- !u!1 &184847711
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 184847712}
+  - component: {fileID: 184847713}
+  - component: {fileID: 184847717}
+  - component: {fileID: 184847716}
+  - component: {fileID: 184847715}
+  - component: {fileID: 184847714}
+  m_Layer: 0
+  m_Name: AR Origin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &184847712
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 184847711}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 773190230}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &184847713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 184847711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 520bb47c46cf8624fafb307b7d1b862a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Camera: {fileID: 1375737375}
+  m_OriginBaseGameObject: {fileID: 184847711}
+  m_CameraFloorOffsetObject: {fileID: 773190229}
+  m_RequestedTrackingOriginMode: 0
+  m_CameraYOffset: 1.1176
+--- !u!114 &184847714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 184847711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ab0e80cee9cc1d44928bfe488dd1e2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PointCloudPrefab: {fileID: 3166792768566169675, guid: 9afe5923b80f8a0458c6c3e7f7b6052c,
+    type: 3}
+--- !u!114 &184847715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 184847711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa17d122634046b4a8e23048891fafc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RaycastPrefab: {fileID: 0}
+--- !u!114 &184847716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 184847711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1760703bbd54c04488a8d10600262ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_PlanePrefab: {fileID: 4798857779442798591, guid: f8f14b5f85cbee24aa2e9a58ee77ff92,
+    type: 3}
+  m_DetectionMode: 1
+--- !u!114 &184847717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 184847711}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 728ad7fae8e460a4ba41265c7308d757, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AnchorPrefab: {fileID: 0}
 --- !u!1 &207147540
 GameObject:
   m_ObjectHideFlags: 0
@@ -1840,13 +1949,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 773190229}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1375737369}
-  m_Father: {fileID: 1964602099}
+  m_Father: {fileID: 184847712}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &792916327
 GameObject:
@@ -2297,12 +2406,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6e264b8f86727d4b91bbe12fa844b9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sessionOrigin: {fileID: 1964602098}
+  sessionOrigin: {fileID: 184847713}
   session: {fileID: 207147542}
   extensions: {fileID: 1487923424}
-  anchorManager: {fileID: 1964602100}
-  planeManager: {fileID: 1964602102}
-  raycastManager: {fileID: 1964602109}
+  anchorManager: {fileID: 184847717}
+  planeManager: {fileID: 184847716}
+  raycastManager: {fileID: 184847715}
   homeView: {fileID: 1656072489}
   resolveView: {fileID: 1993283309}
   arView: {fileID: 1643808590}
@@ -3028,7 +3137,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Session: {fileID: 207147542}
-  SessionOrigin: {fileID: 0}
+  SessionOrigin: {fileID: 184847713}
   CameraManager: {fileID: 1375737373}
   ARCoreExtensionsConfig: {fileID: 11400000, guid: 0f1dfda3b8b72be4b8d0d147e3ec67da,
     type: 2}
@@ -3079,7 +3188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7709b3fec0431cf45be4edaf373b7593, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arPlaneManager: {fileID: 1964602102}
+  arPlaneManager: {fileID: 0}
   OnInitialize:
     m_PersistentCalls:
       m_Calls:
@@ -3182,7 +3291,7 @@ MonoBehaviour:
   OnDraw:
     m_PersistentCalls:
       m_Calls: []
-  anchorManager: {fileID: 1964602100}
+  anchorManager: {fileID: 0}
   arCamera: {fileID: 1375737375}
   defaultColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &1521118746
@@ -3198,7 +3307,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   arExperienceManager: {fileID: 0}
-  anchorManager: {fileID: 1964602100}
+  anchorManager: {fileID: 0}
   churchPrefab: {fileID: 8627553688903744948, guid: da4ca6272173a9045853e63b01eac474,
     type: 3}
 --- !u!4 &1521118747
@@ -4919,115 +5028,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1964195583}
   m_CullTransparentMesh: 1
---- !u!1 &1964602097
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1964602099}
-  - component: {fileID: 1964602098}
-  - component: {fileID: 1964602100}
-  - component: {fileID: 1964602102}
-  - component: {fileID: 1964602109}
-  - component: {fileID: 1964602108}
-  m_Layer: 0
-  m_Name: XR Origin
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &1964602098
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1964602097}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0cb9aa70a22847b5925ee5f067c10a9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Camera: {fileID: 1375737375}
-  m_OriginBaseGameObject: {fileID: 1964602097}
-  m_CameraFloorOffsetObject: {fileID: 773190229}
-  m_RequestedTrackingOriginMode: 0
-  m_CameraYOffset: 1.1176
---- !u!4 &1964602099
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1964602097}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 773190230}
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1964602100
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1964602097}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 728ad7fae8e460a4ba41265c7308d757, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_AnchorPrefab: {fileID: 0}
---- !u!114 &1964602102
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1964602097}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1760703bbd54c04488a8d10600262ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_PlanePrefab: {fileID: 4798857779442798591, guid: f8f14b5f85cbee24aa2e9a58ee77ff92,
-    type: 3}
-  m_DetectionMode: -1
---- !u!114 &1964602108
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1964602097}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ab0e80cee9cc1d44928bfe488dd1e2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_PointCloudPrefab: {fileID: 3166792768566169675, guid: 9afe5923b80f8a0458c6c3e7f7b6052c,
-    type: 3}
---- !u!114 &1964602109
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1964602097}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa17d122634046b4a8e23048891fafc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_RaycastPrefab: {fileID: 0}
 --- !u!1 &1993283309
 GameObject:
   m_ObjectHideFlags: 0
@@ -5461,8 +5461,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9c7b1b524aeeb045b6c29a3e6ade1e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  arRaycasterManager: {fileID: 1964602109}
-  arAnchorManager: {fileID: 1964602100}
+  arRaycasterManager: {fileID: 0}
+  arAnchorManager: {fileID: 0}
   arCloudAnchorManager: {fileID: 2087741682}
   placedPrefab: {fileID: 8627553688903744948, guid: da4ca6272173a9045853e63b01eac474,
     type: 3}
@@ -5478,7 +5478,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f65c92d786ed9ef4cba575f3c634184b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  anchorManager: {fileID: 1964602100}
+  anchorManager: {fileID: 0}
   arCamera: {fileID: 1375737375}
   resolvedAnchorPassedTimeout: 5
 --- !u!4 &2087741683
@@ -5540,8 +5540,8 @@ MonoBehaviour:
           m_BoolArgument: 1
         m_CallState: 2
   maxScanningAreaTime: 10
-  arPlaneManager: {fileID: 1964602102}
-  arPointCloudManager: {fileID: 1964602108}
+  arPlaneManager: {fileID: 0}
+  arPointCloudManager: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -5550,7 +5550,7 @@ SceneRoots:
   - {fileID: 832575519}
   - {fileID: 1487923426}
   - {fileID: 207147543}
-  - {fileID: 1964602099}
+  - {fileID: 184847712}
   - {fileID: 1521118747}
   - {fileID: 2087741683}
   - {fileID: 1033558405}

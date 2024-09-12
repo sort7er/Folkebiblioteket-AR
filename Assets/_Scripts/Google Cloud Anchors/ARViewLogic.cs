@@ -49,7 +49,7 @@ public class ARViewLogic : MonoBehaviour
     public void OnShareButtonClicked()
     {
         GUIUtility.systemCopyBuffer = anchorId;
-        Debuger.Instance.DebugMessage("Copied cloud id: " + anchorId);
+        Debug.Log("Copied cloud id: " + anchorId);
     }
 
     #endregion
@@ -79,7 +79,7 @@ public class ARViewLogic : MonoBehaviour
             case CloudAnchorController.ApplicationMode.Hosting:
             case CloudAnchorController.ApplicationMode.Resolving:
                 uiHandler.SetInstructionText("Detecting flat surface...");
-                Debuger.Instance.DebugMessage("ARCore is preparing for " + controller.mode);
+                Debug.Log("ARCore is preparing for " + controller.mode);
                 break;
         }
     }
@@ -111,31 +111,26 @@ public class ARViewLogic : MonoBehaviour
 
         if (hostPromise != null)
         {
-            Debug.Log("d");
             hostPromise.Cancel();
             hostPromise = null;
         }
 
         if (hostResult != null)
         {
-            Debug.Log("e");
             hostResult = null;
         }
 
         if(resolvePromise != null)
         {
-            Debug.Log("f");
             resolvePromise.Cancel();
             resolvePromise = null;
         }
 
         if(resolveResult != null && resolveResult.Anchor != null)
         {
-            Debug.Log("g");
             Destroy(resolveResult.Anchor.gameObject);
         }
 
-            Debug.Log("h");
         UpdatePlaneVisibility(false);
     }
     #endregion
@@ -244,7 +239,7 @@ public class ARViewLogic : MonoBehaviour
             ReturnToHomePage($"ARCore encountered an error state {ARSession.state}. Please start the app again.");
         }
     }
-    private async void ResolvingCloudAnchors()
+    private void ResolvingCloudAnchors()
     {
         // No Cloud Anchor for resolving.
 
@@ -267,22 +262,16 @@ public class ARViewLogic : MonoBehaviour
 
 
 
-        resolvePromise = controller.anchorManager.ResolveCloudAnchorAsync(anchorId);
+        resolvePromise = controller.anchorManager.ResolveCloudAnchorAsync(controller.LoadCurrentCloudAnchorId());
         
-        if(resolvePromise == null)
-        {
-            Debug.Log(resolvePromise.State + " is the state");
-        }
 
         if (resolvePromise.State == PromiseState.Done)
         {
-            Debug.Log(4);
-            Debuger.Instance.DebugError("Failed to resolve Cloud Anchor " + anchorId);
+            Debug.Log("Failed to resolve Cloud Anchor " + anchorId);
             OnAnchorResolvedFinished(false, anchorId);
         }
         else
         {
-            Debug.Log(5);
             var coroutine = ResolveAnchor(anchorId, resolvePromise);
             StartCoroutine(coroutine);
         }
@@ -301,7 +290,7 @@ public class ARViewLogic : MonoBehaviour
             ARPlane plane = controller.planeManager.GetPlane(hitResults[0].trackableId);
             if (plane == null)
             {
-                Debuger.Instance.DebugError($"Failed to find the ARPlane with TrackableId {hitResults[0].trackableId}");
+                Debug.Log($"Failed to find the ARPlane with TrackableId {hitResults[0].trackableId}");
                 return;
             }
 
@@ -327,7 +316,7 @@ public class ARViewLogic : MonoBehaviour
 
             uiHandler.SetInstructionText("To save this location, walk around the object to capture it from different angles");
 
-            Debuger.Instance.DebugMessage("Waiting for sufficient mapping quaility...");
+            Debug.Log("Waiting for sufficient mapping quaility...");
 
 
             // Hide plane generator so users can focus on the object they placed.
@@ -355,7 +344,7 @@ public class ARViewLogic : MonoBehaviour
         // Ideally, the pose should represent users’ expected perspectives.
 
         FeatureMapQuality quality = controller.anchorManager.EstimateFeatureMapQualityForHosting(GetCameraPose());
-        Debuger.Instance.DebugMessage("Current mapping quality: " + quality);
+        Debug.Log("Current mapping quality: " + quality);
         qualityState = (int)quality;
 
         mapQualityIndicator.UpdateQualityState(qualityState);
@@ -386,15 +375,15 @@ public class ARViewLogic : MonoBehaviour
 
         // Start hosting:
         uiHandler.SetInstructionText("Processing...");
-        Debuger.Instance.DebugMessage("Mapping quality has reached sufficient threshold, " + "creating Cloud Anchor.");
-        Debuger.Instance.DebugMessage($"FeatureMapQuality has reached {controller.anchorManager.EstimateFeatureMapQualityForHosting(GetCameraPose())}, triggering CreateCloudAnchor.");
+        Debug.Log("Mapping quality has reached sufficient threshold, " + "creating Cloud Anchor.");
+        Debug.Log($"FeatureMapQuality has reached {controller.anchorManager.EstimateFeatureMapQualityForHosting(GetCameraPose())}, triggering CreateCloudAnchor.");
 
         // Creating a Cloud Anchor with lifetime = 1 day.
         // This is configurable up to 365 days when keyless authentication is used.
         var promise = controller.anchorManager.HostCloudAnchorAsync(anchor, 1);
         if (promise.State == PromiseState.Done)
         {
-            Debug.LogFormat("Failed to host a Cloud Anchor.");
+            Debug.Log("Failed to host a Cloud Anchor.");
             OnAnchorHostedFinished(false);
         }
         else
@@ -426,28 +415,22 @@ public class ARViewLogic : MonoBehaviour
     }
     private IEnumerator ResolveAnchor(string cloudId, ResolveCloudAnchorPromise promise)
     {
-        Debug.Log(7);
-
-        Debug.Log(promise);
-
         yield return promise;
 
-        Debug.Log(8);
 
         resolveResult = promise.Result;      
         resolvePromise = null;
 
         if (resolveResult.CloudAnchorState == CloudAnchorState.Success)
         {
-        Debug.Log(9);
             OnAnchorResolvedFinished(true, cloudId);
             Instantiate(prefab, resolveResult.Anchor.transform);
         }
         else
         {
-        Debug.Log(10);
             OnAnchorResolvedFinished(false, cloudId, resolveResult.CloudAnchorState.ToString());
         }
+        UpdatePlaneVisibility(false);
     }
     #endregion
 
@@ -459,12 +442,12 @@ public class ARViewLogic : MonoBehaviour
             uiHandler.SetInstructionText("Finish!");
             uiHandler.SuccessfullHosting(anchorId);
             controller.SaveCurrentCloudAnchorId(anchorId);
-            Debuger.Instance.SendMessage($"Succeed to host the Cloud Anchor: {response}");
+            Debug.Log($"Succeed to host the Cloud Anchor: {response}");
         }
         else
         {
             uiHandler.SetInstructionText("Host failed.");
-            Debuger.Instance.SendMessage("Failed to host a Cloud Anchor" + (response == null ? "." : "with error " + response + "."));
+            Debug.Log("Failed to host a Cloud Anchor" + (response == null ? "." : "with error " + response + "."));
         }
     }
     private void OnAnchorResolvedFinished(bool success, string cloudId, string response = null)
@@ -472,19 +455,18 @@ public class ARViewLogic : MonoBehaviour
         if (success)
         {
             uiHandler.SetInstructionText("Resolve success!");
-            Debuger.Instance.DebugMessage($"Succeed to resolve the Cloud Anchor: {cloudId}.");
+            Debug.Log($"Succeed to resolve the Cloud Anchor: {cloudId}.");
         }
         else
         {
             uiHandler.SetInstructionText("Resolve failed.");
-            Debuger.Instance.DebugError("Failed to resolve Cloud Anchor: " + cloudId + (response == null ? "." : "with error " + response + "."));
+            Debug.Log("Failed to resolve Cloud Anchor: " + cloudId + (response == null ? "." : "with error " + response + "."));
         }
     }
     #endregion
 
     private void UpdatePlaneVisibility(bool visible)
     {
-        controller.planeManager.enabled = visible;
         foreach (ARPlane plane in controller.planeManager.trackables)
         {
             plane.gameObject.SetActive(visible);
@@ -493,14 +475,13 @@ public class ARViewLogic : MonoBehaviour
   
     private void ReturnToHomePage(string reason)
     {
-        Debuger.Instance.DebugMessage("Returning home for reason: " + reason);
+        Debug.Log("Returning home for reason: " + reason);
         if (isReturning)
         {
             return;
         }
 
         isReturning = true;
-        Debuger.Instance.DebugMessage(reason);
         Invoke(nameof(DoReturnToHomePage), 3.0f);
     }
 

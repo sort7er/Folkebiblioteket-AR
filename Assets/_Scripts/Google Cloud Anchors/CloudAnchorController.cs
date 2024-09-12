@@ -5,7 +5,7 @@ using Unity.XR.CoreUtils;
 public class CloudAnchorController : MonoBehaviour
 {
     [Header("AR Foundation")]
-    public XROrigin sessionOrigin;
+    public ARSessionOrigin sessionOrigin;
     public ARSession session;
     public GameObject extensions;
     public ARAnchorManager anchorManager;
