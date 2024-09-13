@@ -451,7 +451,7 @@ MonoBehaviour:
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
-  m_ReverseArrangement: 0
+  m_ReverseArrangement: 1
 --- !u!222 &620935948
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1522,6 +1522,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   background: {fileID: 652250420}
+  container: {fileID: 620935946}
   messagePrefab: {fileID: 7839590222155472442, guid: 33a8e6cf94e9cd842864c2c327186c06,
     type: 3}
   descriptionPrefab: {fileID: 6757695047792646017, guid: 2dcb7e2a21090824a99a647ef9d72fa0,
