@@ -42,17 +42,6 @@ public class ARViewLogic : MonoBehaviour
     {
         return new Pose(controller.MainCamera.transform.position, controller.MainCamera.transform.rotation);
     }
-
-
-    #region Buttons
-
-    public void OnShareButtonClicked()
-    {
-        GUIUtility.systemCopyBuffer = anchorId;
-        Debug.Log("Copied cloud id: " + anchorId);
-    }
-
-    #endregion
     
     #region OnEnable and OnDisable
     public void OnEnable()
@@ -207,12 +196,12 @@ public class ARViewLogic : MonoBehaviour
         {
             case CloudAnchorController.ApplicationMode.Hosting:
                 uiHandler.SetInstructionText("Tap to place an object.");
-                Debuger.Instance.SendMessage("Tap a vertical or horizontal plane...");
+                Debug.Log("Tap a vertical or horizontal plane...");
                 return;
 
             case CloudAnchorController.ApplicationMode.Resolving:
                 uiHandler.SetInstructionText("Look at the location you expect to see the AR experience appear.");
-                Debuger.Instance.SendMessage($"Attempting to resolve anchor...");
+                Debug.Log($"Attempting to resolve anchor...");
                 return;
 
             default:
@@ -461,6 +450,13 @@ public class ARViewLogic : MonoBehaviour
         {
             uiHandler.SetInstructionText("Resolve success!");
             Debug.Log($"Succeed to resolve the Cloud Anchor: {cloudId}.");
+
+            if(controller.LoadCurrentCloudAnchorId() != cloudId)
+            {
+                Debug.Log(controller.LoadCurrentCloudAnchorId() + " gets overwritten by" + cloudId);
+                controller.SaveCurrentCloudAnchorId(cloudId);
+            }
+
         }
         else
         {
@@ -472,11 +468,11 @@ public class ARViewLogic : MonoBehaviour
 
     private void UpdatePlaneVisibility(bool visible)
     {
-        //controller.planeManager.enabled= visible;
-        //foreach (ARPlane plane in controller.planeManager.trackables)
-        //{
-        //    plane.gameObject.SetActive(visible);
-        //}
+        controller.planeManager.enabled = visible;
+        foreach (ARPlane plane in controller.planeManager.trackables)
+        {
+            plane.gameObject.SetActive(visible);
+        }
     }
   
     private void ReturnToHomePage(string reason)

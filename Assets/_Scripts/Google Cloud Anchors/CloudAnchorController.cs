@@ -44,6 +44,11 @@ public class CloudAnchorController : MonoBehaviour
 
 
     #region Buttons
+    public void OnCopyID()
+    {
+        GUIUtility.systemCopyBuffer = LoadCurrentCloudAnchorId();
+        Debug.Log("Copied cloud id: " + LoadCurrentCloudAnchorId());
+    }
     public void OnHostButtonClicked()
     {
         mode = ApplicationMode.Hosting;
