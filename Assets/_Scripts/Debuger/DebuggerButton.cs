@@ -2,24 +2,27 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ClickAndDrag : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
+public class DebuggerButton : MonoBehaviour, IDragHandler, IPointerDownHandler, IPointerUpHandler
 {
     [SerializeField] private RectTransform rectTransform;
     [SerializeField] private Image backgroundImage;
     [SerializeField] private Color pressColor;
 
     private Color startColor;
+    private float edge;
 
     private void Awake()
     {
         startColor = backgroundImage.color;
+        edge = Screen.height - rectTransform.sizeDelta.y;
     }
 
     public void OnDrag(PointerEventData eventData)
-    {
-        if(eventData.position.y < rectTransform.sizeDelta.y)
+    {     
+
+        if(eventData.position.y > edge)
         {
-            rectTransform.position = new Vector2(rectTransform.position.x, rectTransform.sizeDelta.y);
+            rectTransform.position = new Vector2(rectTransform.position.x, edge);
         }
         else
         {
