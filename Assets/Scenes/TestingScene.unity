@@ -3885,9 +3885,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1033558404}
-        m_TargetAssemblyTypeName: CloudAnchorController, Assembly-CSharp
-        m_MethodName: SwitchToARView
+      - m_Target: {fileID: 1993283311}
+        m_TargetAssemblyTypeName: ResolveView, Assembly-CSharp
+        m_MethodName: EnterIdManually
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7416,6 +7416,7 @@ GameObject:
   - component: {fileID: 1375737372}
   - component: {fileID: 1375737371}
   - component: {fileID: 1375737370}
+  - component: {fileID: 1375737376}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -7674,6 +7675,23 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &1375737376
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1375737368}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b15f82cc229284894964d2d30806969d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HumanSegmentationStencilMode: 1
+  m_HumanSegmentationDepthMode: 1
+  m_EnvironmentDepthMode: 1
+  m_EnvironmentDepthTemporalSmoothing: 0
+  m_OcclusionPreferenceMode: 0
 --- !u!1 &1375873902
 GameObject:
   m_ObjectHideFlags: 0
@@ -11790,6 +11808,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1033558404}
+  aRViewLogic: {fileID: 1643808593}
   idText: {fileID: 1762931900}
   resolveButton: {fileID: 2040457219}
   resolveButtonImage: {fileID: 2040457220}
@@ -12061,9 +12080,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1033558404}
-        m_TargetAssemblyTypeName: CloudAnchorController, Assembly-CSharp
-        m_MethodName: SwitchToARView
+      - m_Target: {fileID: 1993283311}
+        m_TargetAssemblyTypeName: ResolveView, Assembly-CSharp
+        m_MethodName: ResolvePressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

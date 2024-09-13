@@ -35,6 +35,7 @@ public class ARViewLogic : MonoBehaviour
     //private List<IEnumerator> resolveCoroutines = new List<IEnumerator>();
 
     private string anchorId;
+    private string idToCheck;
 
 
 
@@ -396,13 +397,17 @@ public class ARViewLogic : MonoBehaviour
 
         if (hostResult.CloudAnchorState == CloudAnchorState.Success)
         {
-            anchorId = hostResult.CloudAnchorId;
+            SetAnchorID(hostResult.CloudAnchorId);
             OnAnchorHostedFinished(true, anchorId);
         }
         else
         {
             OnAnchorHostedFinished(false, hostResult.CloudAnchorState.ToString());
         }
+    }
+    public void SetAnchorID(string newID)
+    {
+        anchorId = newID;
     }
     private IEnumerator ResolveAnchor(string cloudId, ResolveCloudAnchorPromise promise)
     {
@@ -451,9 +456,9 @@ public class ARViewLogic : MonoBehaviour
             uiHandler.SetInstructionText("Resolve success!");
             Debug.Log($"Succeed to resolve the Cloud Anchor: {cloudId}.");
 
-            if(controller.LoadCurrentCloudAnchorId() != cloudId)
+            if(controller.LoadCurrentCloudAnchorId() == null)
             {
-                Debug.Log(controller.LoadCurrentCloudAnchorId() + " gets overwritten by" + cloudId);
+                Debug.Log("Set cloud anchor to be" + cloudId);
                 controller.SaveCurrentCloudAnchorId(cloudId);
             }
 
@@ -468,11 +473,11 @@ public class ARViewLogic : MonoBehaviour
 
     private void UpdatePlaneVisibility(bool visible)
     {
-        controller.planeManager.enabled = visible;
-        foreach (ARPlane plane in controller.planeManager.trackables)
-        {
-            plane.gameObject.SetActive(visible);
-        }
+        //controller.planeManager.enabled = visible;
+        //foreach (ARPlane plane in controller.planeManager.trackables)
+        //{
+        //    plane.gameObject.SetActive(visible);
+        //}
     }
   
     private void ReturnToHomePage(string reason)

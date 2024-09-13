@@ -1,9 +1,19 @@
 fileFormatVersion: 2
-guid: 9d9444e591e3ccd44807159c261f54fe
+guid: 76ce519aa7dae0845851e020a9a33ae5
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_church
+    second: {fileID: 2100000, guid: 7f19e795e4fb75c42a8a912411cd997a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_church_walls
+    second: {fileID: 2100000, guid: 7b764842320d7984ca9532586ee7b30a, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

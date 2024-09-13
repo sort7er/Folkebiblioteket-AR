@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class ResolveView : MonoBehaviour
 {
     public CloudAnchorController controller;
+    public ARViewLogic aRViewLogic;
     public TextMeshProUGUI idText;
     public Button resolveButton;
     public Image resolveButtonImage;
@@ -43,6 +44,10 @@ public class ResolveView : MonoBehaviour
             idText.text = controller.LoadCurrentCloudAnchorId();
             copyButton.SetActive(true);
         }
+
+        enterIdButton.SetActive(true);
+        inputField.gameObject.SetActive(false);
+        inputField.text = string.Empty;
     }
     public void EnterIdManually()
     {
@@ -50,11 +55,32 @@ public class ResolveView : MonoBehaviour
         inputField.gameObject.SetActive(true);
         inputField.text = string.Empty;
     }
-    public void OnInputValueChanged(string inputString)
+    public void OnInputValueChanged(string id)
     {
-        if(inputField.text.Length > 0 && regex.IsMatch(inputString))
+        if(IDCheck(id))
         {
             SetButtonActive(true);
+        }
+    }
+
+    public void ResolvePressed()
+    {
+        if (IDCheck(inputField.text))
+        {
+            aRViewLogic.SetAnchorID(inputField.text);
+        }
+
+        controller.SwitchToARView();
+    }
+    private bool IDCheck(string id)
+    {
+        if(id.Length > 0 && regex.IsMatch(id))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 
