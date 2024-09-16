@@ -1,12 +1,18 @@
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 using UnityEngine.XR.ARFoundation;
 
 public class SessionController : MonoBehaviour
 {
     [SerializeField] private GameObject arSession;
     [SerializeField] private GameObject origin;
-    [SerializeField] private ARPlaneManager planeManager;
     [SerializeField] private MainMenuUI mainMenuUI;
+
+    public GameObject churchPrefab;
+    public Camera mainCamera;
+    public ARPlaneManager planeManager;
+    public ARRaycastManager raycastManager;
+    public ARAnchorManager anchorManager;
 
     public bool isReturning { get; private set; }
 
@@ -76,5 +82,9 @@ public class SessionController : MonoBehaviour
     private void DoReturnToHomePage()
     {
         mainMenuUI.MainMenu();
+    }
+    public Pose GetCameraPose()
+    {
+        return new Pose(mainCamera.transform.position, mainCamera.transform.rotation);
     }
 }

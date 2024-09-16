@@ -1,15 +1,20 @@
 using Google.XR.ARCoreExtensions;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.XR.ARFoundation;
+using UnityEngine.XR.ARSubsystems;
 
 public class Hosting : MonoBehaviour
 {
     [SerializeField] private GameObject instructionBar;
     [SerializeField] private TextMeshProUGUI instructionText;
     [SerializeField] private SessionController controller;
+    [SerializeField] private MapQualityIndicator mapQualityIndicatorPrefab;
+
 
     private const float startPrepareTime = 3.0f;
 
@@ -45,7 +50,18 @@ public class Hosting : MonoBehaviour
 
         controller.UpdatePlaneVisibility(false);
     }
-
+    private void CheckDoAndNull<T>(ref T type, Action thingToDo = null) where T : class
+    {
+        if (type != null)
+        {
+            thingToDo?.Invoke();
+            type = null;
+        }
+    }
+    private void SetInstructionText(string text)
+    {
+        instructionText.text = text;
+    }
     private void Update()
     {
         if (timeSinceStart < startPrepareTime)
@@ -54,7 +70,7 @@ public class Hosting : MonoBehaviour
             timeSinceStart += Time.deltaTime;
             if (timeSinceStart >= startPrepareTime)
             {
-                instructionText.text = "Tap to place an object.";
+                SetInstructionText("Tap to place an object.");
             }
 
             return;
@@ -67,16 +83,158 @@ public class Hosting : MonoBehaviour
             return;
         }
 
+
+        // Perform hit test and place an anchor on the hit test result.
+        if (anchor == null)
+        {
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                PerformHitTest(Input.mousePosition);
+            }
+            else
+            {
+                // If the player has not touched the screen then the update is complete.
+                Touch touch;
+                if (Input.touchCount < 1 || (touch = Input.GetTouch(0)).phase != TouchPhase.Began)
+                {
+                    return;
+                }
+
+                // Ignore the touch if it's pointing on UI objects.
+                if (EventSystem.current.IsPointerOverGameObject(touch.fingerId))
+                {
+                    return;
+                }
+
+                // Perform hit test and place a pawn object.
+                PerformHitTest(touch.position);
+            }
+        }
+
+        HostingCloudAnchor();
     }
 
-    private void CheckDoAndNull<T>(ref T type, Action thingToDo = null) where T : class
+    private void PerformHitTest(Vector2 touchPos)
     {
-        if(type!= null)
+        List<ARRaycastHit> hitResults = new List<ARRaycastHit>();
+        controller.raycastManager.Raycast(touchPos, hitResults, TrackableType.PlaneWithinPolygon);
+
+        // If there was an anchor placed, then instantiate the corresponding object.
+        var planeType = PlaneAlignment.HorizontalUp;
+
+        if (hitResults.Count > 0)
         {
-            thingToDo?.Invoke();
-            type = null;
+            ARPlane plane = controller.planeManager.GetPlane(hitResults[0].trackableId);
+            if (plane == null)
+            {
+                Debug.Log($"Failed to find the ARPlane with TrackableId {hitResults[0].trackableId}");
+                return;
+            }
+
+            planeType = plane.alignment;
+            var hitPose = hitResults[0].pose;
+
+            if (Application.platform == RuntimePlatform.IPhonePlayer)
+            {
+                // Point the hitPose rotation roughly away from the raycast/camera
+                // to match ARCore.
+                hitPose.rotation.eulerAngles = new Vector3(0.0f, controller.mainCamera.transform.eulerAngles.y, 0.0f);
+            }
+
+            anchor = controller.anchorManager.AttachAnchor(plane, hitPose);
+        }
+
+        if (anchor != null)
+        {
+            Instantiate(controller.churchPrefab, anchor.transform);
+
+            // Attach map quality indicator to this anchor.
+            mapQualityIndicator = Instantiate(mapQualityIndicatorPrefab, anchor.transform);
+            mapQualityIndicator.DrawIndicator(planeType, controller.mainCamera);
+
+            SetInstructionText("To save this location, walk around the object to capture it from different angles");
+
+            Debug.Log("Waiting for sufficient mapping quaility...");
+
+
+            // Hide plane generator so users can focus on the object they placed.
+            controller.UpdatePlaneVisibility(false);
         }
     }
+
+    private void HostingCloudAnchor()
+    {
+        // There is no anchor for hosting.
+        if (anchor == null)
+        {
+            return;
+        }
+
+        // There is a pending or finished hosting task.
+        if (hostPromise != null || hostResult != null)
+        {
+            return;
+        }
+
+        // Update map quality:
+        int qualityState = 2;
+
+        // Can pass in ANY valid camera pose to the mapping quality API.
+        // Ideally, the pose should represent users’ expected perspectives.
+
+        FeatureMapQuality quality = controller.anchorManager.EstimateFeatureMapQualityForHosting(controller.GetCameraPose());
+        Debug.Log("Current mapping quality: " + quality);
+        qualityState = (int)quality;
+
+        mapQualityIndicator.UpdateQualityState(qualityState);
+
+        // Hosting instructions:
+        var cameraDist = (mapQualityIndicator.transform.position - controller.mainCamera.transform.position).magnitude;
+
+        if (cameraDist < mapQualityIndicator.radius * 1.5f)
+        {
+            SetInstructionText("You are too close, move backward.");
+            return;
+        }
+        else if (cameraDist > 10.0f)
+        {
+            SetInstructionText("You are too far, come closer.");
+            return;
+        }
+        //else if (mapQualityIndicator.ReachTopviewAngle)
+        //{
+        //    SetInstructionText("You are looking from the top view, move around from all sides.");
+        //    return;
+        //}
+        //else if (!mapQualityIndicator.ReachQualityThreshold)
+        //{
+        //    SetInstructionText("Save the object here by capturing it from all sides.");
+        //    return;
+        //}
+
+        //// Start hosting:
+        //SetInstructionText("Processing...");
+        //Debug.Log("Mapping quality has reached sufficient threshold, creating Cloud Anchor.");
+        //Debug.Log($"FeatureMapQuality has reached {controller.anchorManager.EstimateFeatureMapQualityForHosting(controller.GetCameraPose())}, triggering CreateCloudAnchor.");
+
+        //// Creating a Cloud Anchor with lifetime = 1 day.
+        //// This is configurable up to 365 days when keyless authentication is used.
+        //var promise = controller.anchorManager.HostCloudAnchorAsync(anchor, 1);
+        //if (promise.State == PromiseState.Done)
+        //{
+        //    Debug.Log("Failed to host a Cloud Anchor.");
+        //    OnAnchorHostedFinished(false);
+        //}
+        //else
+        //{
+        //    hostPromise = promise;
+        //    hostCoroutine = HostAnchor();
+        //    StartCoroutine(hostCoroutine);
+        //}
+    }
+
+
 
 
 }
