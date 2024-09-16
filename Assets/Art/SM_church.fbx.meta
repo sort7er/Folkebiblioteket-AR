@@ -14,6 +14,26 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: M_church_walls
     second: {fileID: 2100000, guid: 7b764842320d7984ca9532586ee7b30a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_details
+    second: {fileID: 2100000, guid: 647a6a75173df1c4689a538b1cc3b892, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_inner_walls
+    second: {fileID: 2100000, guid: fbfb45272c7001d4ea1856e4bd014982, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_outer_walls
+    second: {fileID: 2100000, guid: 5647a65dfaa9d9a438aaf830430bef5e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: M_roof_floor
+    second: {fileID: 2100000, guid: 59fb32f2ee7479d499b829aac5991646, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
