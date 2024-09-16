@@ -16,8 +16,8 @@ public class Debugger : MonoBehaviour
     private int limit = 60;
     private int debugIdx = 0;
 
-    private float timer;
-    private int count = 0;
+    //private float timer;
+    //private int count = 0;
     private void Awake()
     {
         background.sizeDelta = new Vector2(Screen.width, Screen.height);
@@ -26,25 +26,25 @@ public class Debugger : MonoBehaviour
         InstatntiateText();
     }
 
-    private void Update()
-    {
-        timer += Time.deltaTime;
-        if (timer > 1)
-        {
-            timer = 0;
-            count++;
-            Debug.Log(count);
+    //private void Update()
+    //{
+    //    timer += Time.deltaTime;
+    //    if (timer > 1)
+    //    {
+    //        timer = 0;
+    //        count++;
+    //        Debug.Log(count);
 
-            if (count % 5 == 0)
-            {
-                Debug.LogWarning("No");
-            }
-            if (count % 10 == 0)
-            {
-                Debug.LogError("Hmm");
-            }
-        }
-    }
+    //        if (count % 5 == 0)
+    //        {
+    //            Debug.LogWarning("No");
+    //        }
+    //        if (count % 10 == 0)
+    //        {
+    //            Debug.LogError("Hmm");
+    //        }
+    //    }
+    //}
 
     private void InstatntiateText()
     {
