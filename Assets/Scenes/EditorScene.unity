@@ -1523,9 +1523,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   background: {fileID: 652250420}
   container: {fileID: 620935946}
-  messagePrefab: {fileID: 7839590222155472442, guid: 33a8e6cf94e9cd842864c2c327186c06,
-    type: 3}
-  descriptionPrefab: {fileID: 6757695047792646017, guid: 2dcb7e2a21090824a99a647ef9d72fa0,
+  debugPrefab: {fileID: 5251790898417037751, guid: 8e20a840c80d9304a99bc9d56fd5eacf,
     type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

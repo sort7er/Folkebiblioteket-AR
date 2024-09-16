@@ -1,23 +1,18 @@
-using TMPro;
 using UnityEngine;
 
 public class Debugger : MonoBehaviour
 {
     [SerializeField] private RectTransform background;
     [SerializeField] private RectTransform container;
-    [SerializeField] private TextMeshProUGUI messagePrefab;
-    [SerializeField] private TextMeshProUGUI descriptionPrefab;
+    [SerializeField] private DebugPrefab debugPrefab;
 
 
-    private TextMeshProUGUI[] messageElements;
-    private TextMeshProUGUI[] descriptionTextElements;
-    private int limit = 30;
-    private int messageIdx = 0;
-    private int descriptionIdx = 0;
+    private DebugPrefab[] debugPrefabs;
+    private int limit = 60;
+    private int debugIdx = 0;
 
     private float timer;
-    private int yes;
-
+    private int count = 0;
     private void Awake()
     {
         background.sizeDelta = new Vector2(Screen.width, Screen.height);
@@ -26,71 +21,51 @@ public class Debugger : MonoBehaviour
         InstatntiateText();
     }
 
+    private void Update()
+    {
+        timer += Time.deltaTime;
+        if (timer > 1)
+        {
+            timer = 0;
+            count++;
+            Debug.Log(count);
+            
+            if (count % 5 == 0)
+            {
+                Debug.LogWarning("No");
+            }
+            if (count%10 == 0)
+            {
+                Debug.LogError("Hmm");
+            }
+        }
+    }
+
     private void InstatntiateText()
     {
-        messageElements = new TextMeshProUGUI[limit];
-        descriptionTextElements = new TextMeshProUGUI[limit];
+        debugPrefabs = new DebugPrefab[limit];
 
         for (int i = 0; i < limit; i++)
         {
-            messageElements[i] = Instantiate(messagePrefab, container);
-            descriptionTextElements[i] = Instantiate(descriptionPrefab, container);
+            debugPrefabs[i] = Instantiate(debugPrefab, container);
 
-            messageElements[i].gameObject.SetActive(false);
-            descriptionTextElements[i].gameObject.SetActive(false);
+            debugPrefabs[i].gameObject.SetActive(false);
         }
     }
     public void ConsolePrint(string logString, string stackTrace, LogType type)
     {
-        if (type != LogType.Log)
-        {
-            SetPrint(GetNextDescription(), stackTrace, type);
-        }
-        SetPrint(GetNextMessage(), logString, type);
+        GetNextDebug().SetUpLog(logString, stackTrace, type, container);
     }
 
-    private void SetPrint(TextMeshProUGUI prefab, string log, LogType type)
+    private DebugPrefab GetNextDebug()
     {
-        prefab.gameObject.SetActive(true);
-        prefab.text = log;
-        prefab.transform.SetParent(null);
-        prefab.transform.SetParent(container);
-
-        if (type == LogType.Error)
+        if (debugIdx < debugPrefabs.Length)
         {
-            prefab.color = Color.red;
-        }
-        else if (type == LogType.Warning)
-        {
-            prefab.color = Color.yellow;
-        }
-        else if (type == LogType.Log)
-        {
-            prefab.color = Color.white;
-        }
-    }
-
-
-    private TextMeshProUGUI GetNextMessage()
-    {
-        if (messageIdx < messageElements.Length)
-        {
-            return messageElements[messageIdx++];
+            return debugPrefabs[debugIdx++];
         }
         else
         {
-            return messageElements[messageIdx = 0];
-        }
-    }
-    private TextMeshProUGUI GetNextDescription()
-    {
-        if (descriptionIdx < descriptionTextElements.Length)
-        {
-            return descriptionTextElements[descriptionIdx++];
-        }
-        else
-        {
-            return descriptionTextElements[descriptionIdx = 0];
+            return debugPrefabs[debugIdx = 0];
         }
     }
 }
