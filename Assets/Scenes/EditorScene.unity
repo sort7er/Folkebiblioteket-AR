@@ -494,6 +494,56 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!1 &128965270
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 128965272}
+  - component: {fileID: 128965271}
+  m_Layer: 0
+  m_Name: Extensions
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &128965271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 128965270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b50ad3f5d9024549b0a549c5a03a084, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Session: {fileID: 207147542}
+  SessionOrigin: {fileID: 904521119}
+  CameraManager: {fileID: 1920515340}
+  ARCoreExtensionsConfig: {fileID: 11400000, guid: b5793309e5cafda4ba131ba4147e8b2d,
+    type: 2}
+  CameraConfigFilter: {fileID: 0}
+--- !u!4 &128965272
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 128965270}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 9.95467, y: 2.916753, z: 19.905226}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &207147540
 GameObject:
   m_ObjectHideFlags: 0
@@ -669,7 +719,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: e8eff62fadf046945bdd1567adf79c52, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -678,7 +728,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 10
 --- !u!222 &368166003
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1393,6 +1443,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   arSession: {fileID: 207147540}
   origin: {fileID: 904521116}
+  extensions: {fileID: 128965270}
   mainMenu: {fileID: 688535467}
   hostView: {fileID: 468084462}
   editView: {fileID: 26117405}
@@ -1646,7 +1697,6 @@ GameObject:
   - component: {fileID: 904521118}
   - component: {fileID: 904521117}
   - component: {fileID: 904521122}
-  - component: {fileID: 904521121}
   m_Layer: 0
   m_Name: AR Origin
   m_TagString: Untagged
@@ -1715,24 +1765,6 @@ Transform:
   - {fileID: 806037851}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &904521121
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 904521116}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b50ad3f5d9024549b0a549c5a03a084, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Session: {fileID: 207147542}
-  SessionOrigin: {fileID: 904521119}
-  CameraManager: {fileID: 1920515340}
-  ARCoreExtensionsConfig: {fileID: 11400000, guid: b5793309e5cafda4ba131ba4147e8b2d,
-    type: 2}
-  CameraConfigFilter: {fileID: 0}
 --- !u!114 &904521122
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2144,7 +2176,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 10
 --- !u!222 &1185623809
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2352,7 +2384,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 10
 --- !u!222 &1221404212
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2476,7 +2508,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: e8eff62fadf046945bdd1567adf79c52, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2485,7 +2517,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 10
 --- !u!222 &1223582495
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2906,7 +2938,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 10
 --- !u!222 &1540128036
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3631,6 +3663,7 @@ SceneRoots:
   - {fileID: 410087041}
   - {fileID: 832575519}
   - {fileID: 207147543}
+  - {fileID: 128965272}
   - {fileID: 904521120}
   - {fileID: 787232276}
   - {fileID: 2117411167}
