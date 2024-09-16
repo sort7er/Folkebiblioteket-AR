@@ -1,11 +1,9 @@
 using UnityEngine;
-using UnityEngine.InputSystem.XR;
 using UnityEngine.XR.ARFoundation;
 
 public class SessionController : MonoBehaviour
 {
-    [SerializeField] private GameObject arSession;
-    [SerializeField] private GameObject origin;
+
     [SerializeField] private MainMenuUI mainMenuUI;
 
     public GameObject churchPrefab;
@@ -15,22 +13,10 @@ public class SessionController : MonoBehaviour
     public ARAnchorManager anchorManager;
 
     public bool isReturning { get; private set; }
+    public ChurchAnchor churchAnchor { get; private set; }
 
 
-    private void Awake()
-    {
-        DisableAR();
-    }
-    public void EnableAR()
-    {
-        origin.SetActive(true);
-        arSession.SetActive(true);
-    }
-    public void DisableAR()
-    {
-        origin.SetActive(false);
-        arSession.SetActive(false);
-    }
+
     public void SetIsReturning(bool state)
     {
         isReturning = state;
@@ -86,5 +72,17 @@ public class SessionController : MonoBehaviour
     public Pose GetCameraPose()
     {
         return new Pose(mainCamera.transform.position, mainCamera.transform.rotation);
+    }
+    public void SaveCurrentCloudAnchorId(string name, string id)
+    {
+        if(churchAnchor == null)
+        {
+            churchAnchor = new ChurchAnchor(name, id);
+        }
+        else
+        {
+            churchAnchor.name = name;
+            churchAnchor.id = id;
+        }
     }
 }

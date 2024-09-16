@@ -15,10 +15,12 @@ public class Hosting : MonoBehaviour
     [SerializeField] private SessionController controller;
     [SerializeField] private MapQualityIndicator mapQualityIndicatorPrefab;
 
+    //Can't be more than one unless the project is not using an API key, then it is 365 days
+    [SerializeField] int lifetimeOfAnchorInDays = 1;
+
 
     private const float startPrepareTime = 3.0f;
 
-    private ChurchAnchor churchAnchor;
     private HostCloudAnchorPromise hostPromise;
     private HostCloudAnchorResult hostResult;
     private IEnumerator hostCoroutine;
@@ -202,39 +204,62 @@ public class Hosting : MonoBehaviour
             SetInstructionText("You are too far, come closer.");
             return;
         }
-        //else if (mapQualityIndicator.ReachTopviewAngle)
-        //{
-        //    SetInstructionText("You are looking from the top view, move around from all sides.");
-        //    return;
-        //}
-        //else if (!mapQualityIndicator.ReachQualityThreshold)
-        //{
-        //    SetInstructionText("Save the object here by capturing it from all sides.");
-        //    return;
-        //}
+        else if (mapQualityIndicator.ReachTopviewAngle)
+        {
+            SetInstructionText("You are looking from the top view, move around from all sides.");
+            return;
+        }
+        else if (!mapQualityIndicator.ReachQualityThreshold)
+        {
+            SetInstructionText("Save the object here by capturing it from all sides.");
+            return;
+        }
 
-        //// Start hosting:
-        //SetInstructionText("Processing...");
-        //Debug.Log("Mapping quality has reached sufficient threshold, creating Cloud Anchor.");
-        //Debug.Log($"FeatureMapQuality has reached {controller.anchorManager.EstimateFeatureMapQualityForHosting(controller.GetCameraPose())}, triggering CreateCloudAnchor.");
+        // Start hosting:
+        SetInstructionText("Processing...");
+        Debug.Log("Mapping quality has reached sufficient threshold, creating Cloud Anchor.");
+        Debug.Log($"FeatureMapQuality has reached {controller.anchorManager.EstimateFeatureMapQualityForHosting(controller.GetCameraPose())}, triggering CreateCloudAnchor.");
 
-        //// Creating a Cloud Anchor with lifetime = 1 day.
-        //// This is configurable up to 365 days when keyless authentication is used.
-        //var promise = controller.anchorManager.HostCloudAnchorAsync(anchor, 1);
-        //if (promise.State == PromiseState.Done)
-        //{
-        //    Debug.Log("Failed to host a Cloud Anchor.");
-        //    OnAnchorHostedFinished(false);
-        //}
-        //else
-        //{
-        //    hostPromise = promise;
-        //    hostCoroutine = HostAnchor();
-        //    StartCoroutine(hostCoroutine);
-        //}
+        // Creating a Cloud Anchor with lifetime = 1 day.
+        // This is configurable up to 365 days when keyless authentication is used.
+        HostCloudAnchorPromise promise = controller.anchorManager.HostCloudAnchorAsync(anchor, lifetimeOfAnchorInDays);
+        
+        if (promise.State == PromiseState.Done)
+        {
+            Debug.Log("Failed to host a Cloud Anchor.");
+            HostFailed();
+        }
+        else
+        {
+            hostPromise = promise;
+            hostCoroutine = HostAnchor();
+            StartCoroutine(hostCoroutine);
+        }
     }
 
+    private IEnumerator HostAnchor()
+    {
+        yield return hostPromise;
+        hostResult = hostPromise.Result;
+        hostPromise = null;
 
+        if (hostResult.CloudAnchorState == CloudAnchorState.Success)
+        {
+            string id = hostResult.CloudAnchorId;
 
+            SetInstructionText("Finish!");
+            controller.SaveCurrentCloudAnchorId("name", id);
+            Debug.Log($"Succeed to host the Cloud Anchor: {id}");
+        }
+        else
+        {
+            HostFailed(hostResult.CloudAnchorState.ToString());
+        }
+    }
+    private void HostFailed(string response = null)
+    {
+        SetInstructionText("Host failed.");
+        Debug.Log("Failed to host a Cloud Anchor" + (response == null ? "." : "with error " + response + "."));
+    }
 
 }

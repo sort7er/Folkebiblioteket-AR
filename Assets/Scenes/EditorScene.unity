@@ -949,6 +949,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   instructionBar: {fileID: 1378791939}
   instructionText: {fileID: 923717673}
+  controller: {fileID: 0}
+  mapQualityIndicatorPrefab: {fileID: 0}
+  lifetimeOfAnchorInDays: 1
 --- !u!1 &620935945
 GameObject:
   m_ObjectHideFlags: 0
@@ -1148,6 +1151,7 @@ GameObject:
   - component: {fileID: 787232274}
   - component: {fileID: 787232273}
   - component: {fileID: 787232277}
+  - component: {fileID: 787232278}
   m_Layer: 5
   m_Name: SessionController
   m_TagString: Untagged
@@ -1252,11 +1256,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 621ded83c2db9b241a24239fa813c7e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  arSession: {fileID: 207147540}
+  origin: {fileID: 904521116}
   mainMenu: {fileID: 688535467}
   hostView: {fileID: 468084462}
   editView: {fileID: 26117405}
-  arSession: {fileID: 207147540}
-  origin: {fileID: 904521116}
+--- !u!114 &787232278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 787232272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02ecded80e3747a49a978e06dd63767f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainMenuUI: {fileID: 787232277}
+  churchPrefab: {fileID: 0}
+  mainCamera: {fileID: 1920515342}
+  planeManager: {fileID: 904521117}
+  raycastManager: {fileID: 904521122}
+  anchorManager: {fileID: 904521118}
 --- !u!1 &806037850
 GameObject:
   m_ObjectHideFlags: 0
