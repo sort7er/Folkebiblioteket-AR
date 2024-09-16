@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 
-public class Hosting : MonoBehaviour
+public class HostingController : MonoBehaviour
 {
     [SerializeField] private GameObject instructionBar;
     [SerializeField] private TextMeshProUGUI instructionText;
