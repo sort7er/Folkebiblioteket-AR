@@ -1,42 +1,20 @@
 using UnityEngine;
+using UnityEngine.XR.ARFoundation;
 
 public class SessionController : MonoBehaviour
 {
-    public GameObject mainMenu;
-    public GameObject hostView;
-    public GameObject editView;
+    [SerializeField] private GameObject arSession;
+    [SerializeField] private GameObject origin;
+    [SerializeField] private ARPlaneManager planeManager;
+    [SerializeField] private MainMenuUI mainMenuUI;
 
-    public GameObject arSession;
-    public GameObject origin;
+    public bool isReturning { get; private set; }
+
 
     private void Awake()
     {
         DisableAR();
     }
-
-    #region Buttons
-    public void Host()
-    {
-        ResetAllViews();
-        EnableAR();
-        hostView.SetActive(true);
-    }
-
-    public void EditChurch()
-    {
-        ResetAllViews();
-        EnableAR();
-        editView.SetActive(true);
-    }
-    public void MainMenu()
-    {
-        ResetAllViews();
-        DisableAR();
-        mainMenu.SetActive(true);
-    }
-
-    #endregion
-
     public void EnableAR()
     {
         origin.SetActive(true);
@@ -47,15 +25,56 @@ public class SessionController : MonoBehaviour
         origin.SetActive(false);
         arSession.SetActive(false);
     }
-
-    private void ResetAllViews()
+    public void SetIsReturning(bool state)
     {
-        mainMenu.SetActive(false);
-        hostView.SetActive(false);
-        editView.SetActive(false);
+        isReturning = state;
     }
 
+    public void UpdatePlaneVisibility(bool visible)
+    {
+        planeManager.enabled = visible;
 
+        foreach (ARPlane plane in planeManager.trackables)
+        {
+            plane.gameObject.SetActive(visible);
+        }
+    }
 
+    public void ErrorCheckAndDisableSleep()
+    {
+        // Only allow the screen to sleep when not tracking.
+        var sleepTimeout = SleepTimeout.NeverSleep;
 
+        if (ARSession.state != ARSessionState.SessionTracking)
+        {
+            sleepTimeout = SleepTimeout.SystemSetting;
+        }
+
+        Screen.sleepTimeout = sleepTimeout;
+
+        if (isReturning)
+        {
+            return;
+        }
+
+        // Return to home page if ARSession is in error status.
+        if (ARSession.state != ARSessionState.Ready && ARSession.state != ARSessionState.SessionInitializing && ARSession.state != ARSessionState.SessionTracking)
+        {
+            string reason = $"ARCore encountered an error state {ARSession.state}. Please start the app again.";
+            Debug.Log("Returning home for reason: " + reason);
+
+            if (isReturning)
+            {
+                return;
+            }
+
+            SetIsReturning(true);
+            Invoke(nameof(DoReturnToHomePage), 3.0f);
+        }
+    }
+
+    private void DoReturnToHomePage()
+    {
+        mainMenuUI.MainMenu();
+    }
 }
