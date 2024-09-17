@@ -1,16 +1,18 @@
 using Google.XR.ARCoreExtensions;
-using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem.XR;
 using UnityEngine.XR.ARFoundation;
 
 public class ResolveController : MonoBehaviour
 {
 
     [SerializeField] private TextMeshProUGUI instructionText;
+    [SerializeField] private GameObject instructionbar;
+    [SerializeField] private GameObject backButton;
+    [SerializeField] private GameObject editButton;
     [SerializeField] private SessionController controller;
+    [SerializeField] private ChurchEditor churchEditor;
 
     private ResolveCloudAnchorPromise resolvePromise;
     private ResolveCloudAnchorResult resolveResult;
@@ -23,6 +25,9 @@ public class ResolveController : MonoBehaviour
         timeSinceStart = 0;
         resolvePromise = null;
         resolveResult = null;
+
+
+        SetEditButton(true);
 
         controller.SetIsReturning(false);
         controller.UpdatePlaneVisibility(true);
@@ -131,8 +136,8 @@ public class ResolveController : MonoBehaviour
 
             Church church = Instantiate(controller.churchPrefab, resolveResult.Anchor.transform);
 
-            //changeTrans.SetChurch(church);
-            //changeTrans.ShowChangeButton(true);
+            churchEditor.SetChurch(church);
+            SetEditButton(true);
         }
         else
         {
@@ -146,5 +151,28 @@ public class ResolveController : MonoBehaviour
         SetInstructionText("Resolve failed.");
         Debug.Log("Failed to resolve Cloud Anchor: " + id + (response == null ? "." : "with error " + response + "."));
     }
+
+    private void SetEditButton(bool state)
+    {
+        editButton.SetActive(state);
+    }
+
+    public void SwitchToEdit()
+    {
+        SetEditButton(false);
+        backButton.SetActive(false);
+        instructionbar.SetActive(false);
+
+        churchEditor.SelectionMenu();
+
+    }
+
+    public void EditDone()
+    {
+        SetEditButton(true);
+        backButton.SetActive(true); 
+        instructionbar.SetActive(true);
+    }
+
 
 }
