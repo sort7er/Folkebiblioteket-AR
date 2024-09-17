@@ -1,5 +1,4 @@
 using Google.XR.ARCoreExtensions;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -46,7 +45,7 @@ public class HostingController : MonoBehaviour
         controller.CheckDoAndNull(ref mapQualityIndicator, () => Destroy(mapQualityIndicator.gameObject));
         controller.CheckDoAndNull(ref anchor, () => Destroy(anchor.gameObject));
         controller.CheckDoAndNull(ref hostCoroutine, () => StopCoroutine(hostCoroutine));
-        controller.CheckDoAndNull(ref hostResult, () => hostPromise.Cancel());
+        controller.CheckDoAndNull(ref hostPromise, () => hostPromise.Cancel());
         controller.CheckDoAndNull(ref hostResult);
 
         controller.UpdatePlaneVisibility(false);

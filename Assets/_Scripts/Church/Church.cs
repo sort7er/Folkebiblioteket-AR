@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class Church : MonoBehaviour
 {
+    public Transform churchTransform;
     [SerializeField] private float movementSpeed = 5;
     [SerializeField] private float scaleSpeed = 0.5f;
     [SerializeField] private float rotateSpeed = 10f;
-    [SerializeField] private Transform churchTransform;
     [SerializeField] private MeshRenderer meshRenderer;
 
     [SerializeField] private Color xColor;
@@ -71,110 +71,129 @@ public class Church : MonoBehaviour
 
 
     #region Changing the church transform
-    public void MoveLeft()
+    public Vector3 MoveLeft()
     {
         float xPos = churchTransform.localPosition.x;
         xPos -= movementSpeed * Time.deltaTime;
 
-        meshRenderer.material.color = xColor;
+        SetMaterialColor(xColor);
+
 
         churchTransform.localPosition = new Vector3(xPos, churchTransform.localPosition.y, churchTransform.localPosition.z);
+        Debug.Log(churchTransform.localPosition.x);
+
+        return churchTransform.localPosition;
     }
-    public void MoveRight()
+    public Vector3 MoveRight()
     {
 
         float xPos = churchTransform.localPosition.x;
         xPos += movementSpeed * Time.deltaTime;
 
-        meshRenderer.material.color = xColor;
+        SetMaterialColor(xColor);
 
         churchTransform.localPosition = new Vector3(xPos, churchTransform.localPosition.y, churchTransform.localPosition.z);
+        return churchTransform.localPosition;
     }
-    public void MoveUp()
+    public Vector3 MoveUp()
     {
         float yPos = churchTransform.localPosition.y;
         yPos += movementSpeed * Time.deltaTime;
 
-        meshRenderer.material.color = yColor;
+        SetMaterialColor(yColor);
 
 
         churchTransform.localPosition = new Vector3(churchTransform.localPosition.x, yPos, churchTransform.localPosition.z);
+        return churchTransform.localPosition;
     }
-    public void MoveDown()
+    public Vector3 MoveDown()
     {
         float yPos = churchTransform.localPosition.y;
         yPos -= movementSpeed * Time.deltaTime;
 
-        meshRenderer.material.color = yColor;
+        SetMaterialColor(yColor);
 
         churchTransform.localPosition = new Vector3(churchTransform.localPosition.x, yPos, churchTransform.localPosition.z);
+        return churchTransform.localPosition;
     }
-    public void MoveForward()
+    public Vector3 MoveForward()
     {
         float zPos = churchTransform.localPosition.z;
         zPos += movementSpeed * Time.deltaTime;
 
 
-        meshRenderer.material.color = zColor;
+        SetMaterialColor(zColor);
 
         churchTransform.localPosition = new Vector3(churchTransform.localPosition.x, churchTransform.localPosition.y, zPos);
+        return churchTransform.localPosition;
     }
-    public void MoveBackwards()
+    public Vector3 MoveBackwards()
     {
         float zPos = churchTransform.localPosition.z;
         zPos -= movementSpeed * Time.deltaTime;
 
-        meshRenderer.material.color = zColor;
+        SetMaterialColor(zColor);
 
         churchTransform.localPosition = new Vector3(churchTransform.localPosition.x, churchTransform.localPosition.y, zPos);
+        return churchTransform.localPosition;
     }
 
-    public void ScaleUp()
+    public float ScaleUp()
     {
         float currentScale = churchTransform.localScale.x;
         currentScale += scaleSpeed * Time.deltaTime;
 
-        meshRenderer.material.color = sizeUpColor;
+        SetMaterialColor(sizeUpColor);
 
         churchTransform.localScale = Vector3.one * currentScale;
+        return churchTransform.localScale.x;
     }
-    public void ScaleDown()
+    public float ScaleDown()
     {
         float currentScale = churchTransform.localScale.x;
         currentScale -= scaleSpeed * Time.deltaTime;
 
-        meshRenderer.material.color = sizeDownColor;
+        SetMaterialColor(sizeDownColor);
 
         churchTransform.localScale = Vector3.one * currentScale;
+        return churchTransform.localScale.x;
     }
 
-    public void RotateLeft()
+    public float RotateLeft()
     {
         float currentRotation = churchTransform.localEulerAngles.y;
         currentRotation -= rotateSpeed * Time.deltaTime;
 
-        meshRenderer.material.color = rotateLeftColor;
+        SetMaterialColor(rotateLeftColor);
 
         churchTransform.localEulerAngles = Vector3.up * currentRotation;
+        return churchTransform.localEulerAngles.y;
     }
-    public void RotateRight()
+    public float RotateRight()
     {
         float currentRotation = churchTransform.localEulerAngles.y;
         currentRotation += rotateSpeed * Time.deltaTime;
 
-        meshRenderer.material.color = rotateRightColor;
+        SetMaterialColor(rotateRightColor);
 
         churchTransform.localEulerAngles = Vector3.up * currentRotation;
+
+        return churchTransform.localEulerAngles.y;
     }
 
     public void PressDone()
     {
-
-        Debug.Log("donee");
-
-        meshRenderer.material.color = startColor;
+        SetMaterialColor(startColor);
     }
 
     #endregion
+
+    private void SetMaterialColor(Color color)
+    {
+        for(int i = 0; i< meshRenderer.materials.Length; i++)
+        {
+            meshRenderer.materials[i].color = color;
+        }
+    }
 
 }

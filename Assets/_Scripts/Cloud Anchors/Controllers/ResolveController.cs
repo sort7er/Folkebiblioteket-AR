@@ -27,7 +27,7 @@ public class ResolveController : MonoBehaviour
         resolveResult = null;
 
 
-        SetEditButton(true);
+        SetEditButton(false);
 
         controller.SetIsReturning(false);
         controller.UpdatePlaneVisibility(true);

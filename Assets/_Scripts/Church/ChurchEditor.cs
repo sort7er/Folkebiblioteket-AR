@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 
 public class ChurchEditor : MonoBehaviour
@@ -8,7 +9,10 @@ public class ChurchEditor : MonoBehaviour
     [SerializeField] private GameObject rotateMenu;
     [SerializeField] private GameObject resizeMenu;
     [SerializeField] private ResolveController resolveController;
-    [SerializeField] private MainMenuUI mainMenuUI;
+
+    [SerializeField] private TextMeshProUGUI locationText;
+    [SerializeField] private TextMeshProUGUI rotationText;
+    [SerializeField] private TextMeshProUGUI scaleText;
 
     private Church church;
 
@@ -20,9 +24,12 @@ public class ChurchEditor : MonoBehaviour
 
     public void SaveAndGoBack()
     {
+        GoBack();
+    }
+    public void GoBack()
+    {
         DisableAllMenus();
         resolveController.EditDone();
-        mainMenuUI.EnableAR();
     }
 
     public void SetChurch(Church church)
@@ -35,28 +42,22 @@ public class ChurchEditor : MonoBehaviour
         DisableAllMenus();
         selectionMenu.SetActive(true);
 
-        //Try and disable AR here later
-        mainMenuUI.DisableAR();
-
     }
 
     public void Relocate()
     {
         DisableAllMenus();
         relocateMenu.SetActive(true);
-        mainMenuUI.EnableAR();
     }
     public void Rotate()
     {
         DisableAllMenus();
         rotateMenu.SetActive(true);
-        mainMenuUI.EnableAR();
     }
     public void Resize()
     {
         DisableAllMenus();
         resizeMenu.SetActive(true);
-        mainMenuUI.EnableAR();
 
     }
     private void DisableAllMenus()
@@ -69,47 +70,65 @@ public class ChurchEditor : MonoBehaviour
     #region Changing the church transform
     public void MoveLeft()
     {
-        church.MoveLeft();
+        UpdatePosition(church.MoveLeft());
     }
     public void MoveRight()
     {
-        church.MoveRight();
+        UpdatePosition(church.MoveRight());
     }
     public void MoveUp()
     {
-        church.MoveUp();
+        UpdatePosition(church.MoveUp());
     }
     public void MoveDown()
     {
-        church.MoveDown();
+        UpdatePosition(church.MoveDown());
     }
     public void MoveForward()
     {
-        church.MoveForward();
+        UpdatePosition(church.MoveForward());
     }
     public void MoveBackwards()
     {
-        church.MoveBackwards();
+        UpdatePosition(church.MoveBackwards());
     }
     public void ScaleUp()
     {
-        church.ScaleUp();
+        UpdateScale(church.ScaleUp());
     }
     public void ScaleDown()
     {
-        church.ScaleDown();
+        UpdateScale(church.ScaleDown());
     }
     public void RotateLeft()
     {
-        church.RotateLeft();
+        UpdateRotatiom(church.RotateLeft());
     }
     public void RotateRight()
     {
-        church.RotateRight();
+        UpdateRotatiom(church.RotateRight());
     }
     public void PressDone()
     {
         church.PressDone();
+    }
+
+    private void UpdatePosition(Vector3 localPosition)
+    {
+        string x = localPosition.x.ToString("F1");
+        string y = localPosition.y.ToString("F1");
+        string z = localPosition.z.ToString("F1");
+
+        locationText.text = $"({x},{y},{z})";
+    }
+    private void UpdateRotatiom(float rotation)
+    {
+        rotationText.text = rotation.ToString("F1");
+    }
+
+    private void UpdateScale(float scale)
+    {
+        scaleText.text = scale.ToString("F1");
     }
 
     #endregion
