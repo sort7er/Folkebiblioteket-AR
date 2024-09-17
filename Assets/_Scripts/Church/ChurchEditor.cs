@@ -60,6 +60,53 @@ public class ChurchEditor : MonoBehaviour
         resizeMenu.SetActive(false);
         selectionMenu.SetActive(false);
     }
+    #region Changing the church transform
+    public void MoveLeft()
+    {
+        church.MoveLeft();
+    }
+    public void MoveRight()
+    {
+        church.MoveRight();
+    }
+    public void MoveUp()
+    {
+        church.MoveUp();
+    }
+    public void MoveDown()
+    {
+        church.MoveDown();
+    }
+    public void MoveForward()
+    {
+        church.MoveForward();
+    }
+    public void MoveBackwards()
+    {
+        church.MoveBackwards();
+    }
+    public void ScaleUp()
+    {
+        church.ScaleUp();
+    }
+    public void ScaleDown()
+    {
+        church.ScaleDown();
+    }
+    public void RotateLeft()
+    {
+        church.RotateLeft();
+    }
+    public void RotateRight()
+    {
+        church.RotateRight();
+    }
+    public void PressDone()
+    {
+        church.PressDone();
+    }
+
+    #endregion
 
 
 }
