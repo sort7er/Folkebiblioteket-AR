@@ -1,8 +1,9 @@
+using System;
 using UnityEngine;
 
 public class Church : MonoBehaviour
 {
-    public Transform churchTransform;
+    [SerializeField] private Transform churchTransform;
     [SerializeField] private float movementSpeed = 5;
     [SerializeField] private float scaleSpeed = 0.5f;
     [SerializeField] private float rotateSpeed = 10f;
@@ -19,59 +20,37 @@ public class Church : MonoBehaviour
     private Color startColor;
 
 
-    private const string xLocalPos = "xLocalPos";
-    private const string yLocalPos = "yLocalPos";
-    private const string zLocalPos = "zLocalPos";
-    private const string yLocalAngle = "yLocalAngle";
-    private const string localScale = "localScale";
-
-
-    private void Awake()
-    {
-        startColor = meshRenderer.material.color;
-        CheckTransform();
-    }
 
     #region Setting the church transform
 
-    private void CheckTransform()
+
+    public void ChurchSetUp(ChurchAnchor church)
     {
-        if (PlayerPrefs.HasKey(xLocalPos))
-        {
-            Vector3 localPos = new Vector3(PlayerPrefs.GetFloat(xLocalPos), PlayerPrefs.GetFloat(yLocalPos), PlayerPrefs.GetFloat(zLocalPos));
-            churchTransform.localPosition = localPos;
-        }
+        startColor = meshRenderer.material.color;
 
-        if (PlayerPrefs.HasKey(yLocalAngle))
-        {
-            Vector3 localAngle = Vector3.up * PlayerPrefs.GetFloat(yLocalAngle);
-            churchTransform.localRotation = Quaternion.Euler(localAngle);
-        }
+        Debug.Log("x " + church.localPosX);
+        Debug.Log("y " + church.localPosY);
+        Debug.Log("z " + church.localPosZ);
+        Debug.Log("rotation " + church.localEulerY);
+        Debug.Log("scale " + church.localScale);
 
 
-        if (PlayerPrefs.HasKey(localScale))
-        {
-            Vector3 scale = Vector3.one * PlayerPrefs.GetFloat(localScale);
-            churchTransform.localScale = scale;
-        }
+        Vector3 localPos = new Vector3(church.localPosX, church.localPosY, church.localPosZ);
+        churchTransform.localPosition = localPos;
+
+        Vector3 localAngle = Vector3.up * church.localEulerY;
+        churchTransform.localRotation = Quaternion.Euler(localAngle);
+
+        Vector3 scale = Vector3.one * church.localScale;
+        churchTransform.localScale = scale;
+
     }
 
     #endregion
 
 
-    public void SaveTransform()
-    {
-        PlayerPrefs.SetFloat(xLocalPos, churchTransform.localPosition.x);
-        PlayerPrefs.SetFloat(yLocalPos, churchTransform.localPosition.y);
-        PlayerPrefs.SetFloat(zLocalPos, churchTransform.localPosition.z);
-
-        PlayerPrefs.SetFloat(yLocalAngle, churchTransform.localEulerAngles.y);
-        PlayerPrefs.SetFloat(localScale, churchTransform.localScale.x);
-    }
-
-
     #region Changing the church transform
-    public Vector3 MoveLeft()
+    public void MoveLeft()
     {
         float xPos = churchTransform.localPosition.x;
         xPos -= movementSpeed * Time.deltaTime;
@@ -80,11 +59,8 @@ public class Church : MonoBehaviour
 
 
         churchTransform.localPosition = new Vector3(xPos, churchTransform.localPosition.y, churchTransform.localPosition.z);
-        Debug.Log(churchTransform.localPosition.x);
-
-        return churchTransform.localPosition;
     }
-    public Vector3 MoveRight()
+    public void MoveRight()
     {
 
         float xPos = churchTransform.localPosition.x;
@@ -93,9 +69,8 @@ public class Church : MonoBehaviour
         SetMaterialColor(xColor);
 
         churchTransform.localPosition = new Vector3(xPos, churchTransform.localPosition.y, churchTransform.localPosition.z);
-        return churchTransform.localPosition;
     }
-    public Vector3 MoveUp()
+    public void MoveUp()
     {
         float yPos = churchTransform.localPosition.y;
         yPos += movementSpeed * Time.deltaTime;
@@ -104,9 +79,8 @@ public class Church : MonoBehaviour
 
 
         churchTransform.localPosition = new Vector3(churchTransform.localPosition.x, yPos, churchTransform.localPosition.z);
-        return churchTransform.localPosition;
     }
-    public Vector3 MoveDown()
+    public void MoveDown()
     {
         float yPos = churchTransform.localPosition.y;
         yPos -= movementSpeed * Time.deltaTime;
@@ -114,9 +88,8 @@ public class Church : MonoBehaviour
         SetMaterialColor(yColor);
 
         churchTransform.localPosition = new Vector3(churchTransform.localPosition.x, yPos, churchTransform.localPosition.z);
-        return churchTransform.localPosition;
     }
-    public Vector3 MoveForward()
+    public void MoveForward()
     {
         float zPos = churchTransform.localPosition.z;
         zPos += movementSpeed * Time.deltaTime;
@@ -125,9 +98,8 @@ public class Church : MonoBehaviour
         SetMaterialColor(zColor);
 
         churchTransform.localPosition = new Vector3(churchTransform.localPosition.x, churchTransform.localPosition.y, zPos);
-        return churchTransform.localPosition;
     }
-    public Vector3 MoveBackwards()
+    public void MoveBackwards()
     {
         float zPos = churchTransform.localPosition.z;
         zPos -= movementSpeed * Time.deltaTime;
@@ -135,10 +107,9 @@ public class Church : MonoBehaviour
         SetMaterialColor(zColor);
 
         churchTransform.localPosition = new Vector3(churchTransform.localPosition.x, churchTransform.localPosition.y, zPos);
-        return churchTransform.localPosition;
     }
 
-    public float ScaleUp()
+    public void ScaleUp()
     {
         float currentScale = churchTransform.localScale.x;
         currentScale += scaleSpeed * Time.deltaTime;
@@ -146,9 +117,8 @@ public class Church : MonoBehaviour
         SetMaterialColor(sizeUpColor);
 
         churchTransform.localScale = Vector3.one * currentScale;
-        return churchTransform.localScale.x;
     }
-    public float ScaleDown()
+    public void ScaleDown()
     {
         float currentScale = churchTransform.localScale.x;
         currentScale -= scaleSpeed * Time.deltaTime;
@@ -156,10 +126,9 @@ public class Church : MonoBehaviour
         SetMaterialColor(sizeDownColor);
 
         churchTransform.localScale = Vector3.one * currentScale;
-        return churchTransform.localScale.x;
     }
 
-    public float RotateLeft()
+    public void RotateLeft()
     {
         float currentRotation = churchTransform.localEulerAngles.y;
         currentRotation -= rotateSpeed * Time.deltaTime;
@@ -167,9 +136,8 @@ public class Church : MonoBehaviour
         SetMaterialColor(rotateLeftColor);
 
         churchTransform.localEulerAngles = Vector3.up * currentRotation;
-        return churchTransform.localEulerAngles.y;
     }
-    public float RotateRight()
+    public void RotateRight()
     {
         float currentRotation = churchTransform.localEulerAngles.y;
         currentRotation += rotateSpeed * Time.deltaTime;
@@ -177,8 +145,6 @@ public class Church : MonoBehaviour
         SetMaterialColor(rotateRightColor);
 
         churchTransform.localEulerAngles = Vector3.up * currentRotation;
-
-        return churchTransform.localEulerAngles.y;
     }
 
     public void PressDone()
@@ -195,5 +161,18 @@ public class Church : MonoBehaviour
             meshRenderer.materials[i].color = color;
         }
     }
+    public Vector3 LocalPosition()
+    {
+        return churchTransform.localPosition;
+    }
+    public float LocalEulerY()
+    {
+        return churchTransform.localEulerAngles.y;
+    }
+    public float Scale()
+    {
+        return churchTransform.localScale.x;
+    }
+
 
 }

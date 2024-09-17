@@ -127,16 +127,10 @@ public class ResolveController : MonoBehaviour
             SetInstructionText("Resolve success!");
             Debug.Log($"Succeed to resolve the Cloud Anchor: {cloudId}.");
 
-            if (controller.churchAnchor == null)
-            {
-                Debug.Log("Set cloud anchor to be" + cloudId);
-                controller.SaveCurrentCloudAnchorId("Name ", cloudId);
-            }
-
 
             Church church = Instantiate(controller.churchPrefab, resolveResult.Anchor.transform);
 
-            churchEditor.SetChurch(church);
+            churchEditor.SetChurch(church, controller.churchAnchor);
             SetEditButton(true);
         }
         else

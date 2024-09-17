@@ -1,7 +1,5 @@
 using System;
-using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem.XR;
 using UnityEngine.XR.ARFoundation;
 
 public class SessionController : MonoBehaviour
@@ -16,6 +14,45 @@ public class SessionController : MonoBehaviour
 
     public bool isReturning { get; private set; }
     public ChurchAnchor churchAnchor { get; private set; }
+
+
+    private const string idKey = "idKey";
+    private const string nameKey = "nameKey";
+    private const string xLocalPos = "xLocalPos";
+    private const string yLocalPos = "yLocalPos";
+    private const string zLocalPos = "zLocalPos";
+    private const string yLocalAngle = "yLocalAngle";
+    private const string localScale = "localScale";
+
+    private void Awake()
+    {
+        if (PlayerPrefs.HasKey(idKey))
+        {
+            SaveCurrentCloudAnchorId(PlayerPrefs.GetString(nameKey), PlayerPrefs.GetString(idKey));
+
+            if (PlayerPrefs.HasKey(xLocalPos) && PlayerPrefs.HasKey(yLocalPos) && PlayerPrefs.HasKey(zLocalPos))
+            {
+                float x = PlayerPrefs.GetFloat(xLocalPos);
+                float y = PlayerPrefs.GetFloat(yLocalPos);
+                float z = PlayerPrefs.GetFloat(zLocalPos);
+
+                churchAnchor.SetLocalPosition(new Vector3(x, y, z));
+                Debug.Log("Position recovered");
+            }
+            if (PlayerPrefs.HasKey(yLocalAngle))
+            {
+                churchAnchor.SetLocalEulerY(PlayerPrefs.GetFloat(yLocalAngle));
+                Debug.Log("Rotation recovered");
+            }
+            if (PlayerPrefs.HasKey(localScale))
+            {
+                churchAnchor.SetLocalScale(PlayerPrefs.GetFloat(localScale));
+                Debug.Log("Scale recovered");
+            }
+
+        }
+    }
+
 
 
     public void SetIsReturning(bool state)
@@ -87,6 +124,22 @@ public class SessionController : MonoBehaviour
             churchAnchor.name = name;
             churchAnchor.id = id;
         }
+
+        PlayerPrefs.SetString(nameKey, id);
+        PlayerPrefs.SetString(idKey, id);
+    }
+    public void SaveTransform(Vector3 localPosition, float eulerY, float scale)
+    {
+        PlayerPrefs.SetFloat(xLocalPos, localPosition.x);
+        PlayerPrefs.SetFloat(yLocalPos, localPosition.y);
+        PlayerPrefs.SetFloat(zLocalPos, localPosition.z);
+
+        PlayerPrefs.SetFloat(yLocalAngle, eulerY);
+        PlayerPrefs.SetFloat(localScale, scale);
+
+        churchAnchor.SetLocalPosition(localPosition);
+        churchAnchor.SetLocalEulerY(eulerY);
+        churchAnchor.SetLocalScale(scale);
     }
 
     public void CheckDoAndNull<T>(ref T type, Action thingToDo = null) where T : class

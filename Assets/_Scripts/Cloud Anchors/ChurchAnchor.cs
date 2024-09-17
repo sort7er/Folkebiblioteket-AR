@@ -38,4 +38,9 @@ public class ChurchAnchor
     {
         localScale = scale;
     }
+
+    public string GetChurchAnchorSting()
+    {
+        return name + ";" + id + ";" + localPosX + ";" + localPosY + ";" + localPosZ + ";" + localEulerY + ";" + localScale;
+    }
 }

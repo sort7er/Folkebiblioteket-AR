@@ -45,6 +45,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 360
-  radius: 0.2
+  radius: 0.15
   mapQualityBarPrefab: {fileID: 1299130176204799551, guid: 593bfe1f230442247ae36c675640ce76,
     type: 3}

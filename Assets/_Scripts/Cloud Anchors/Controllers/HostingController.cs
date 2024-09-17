@@ -241,8 +241,9 @@ public class HostingController : MonoBehaviour
         {
             string id = hostResult.CloudAnchorId;
 
-            SetInstructionText("Finish!");
+            SetInstructionText("Finished!");
             controller.SaveCurrentCloudAnchorId("name", id);
+            controller.SaveTransform(Vector3.forward * 20, 270, 1);
             Debug.Log($"Succeed to host the Cloud Anchor: {id}");
         }
         else

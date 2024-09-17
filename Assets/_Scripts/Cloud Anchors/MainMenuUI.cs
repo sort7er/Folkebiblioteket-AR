@@ -9,10 +9,14 @@ public class MainMenuUI : MonoBehaviour
     [SerializeField] private GameObject hostView;
     [SerializeField] private GameObject editView;
     [SerializeField] private GameObject cantResolveMessage;
+    [SerializeField] private GameObject editButton, copyIdButton;
     [SerializeField] private SessionController controller;
 
 
-
+    private void Start()
+    {
+        AnchorCheck();
+    }
 
     #region Buttons
     public void Host()
@@ -21,7 +25,6 @@ public class MainMenuUI : MonoBehaviour
         EnableAR();
         hostView.SetActive(true);
     }
-
     public void EditChurch()
     {
         if(controller.churchAnchor!= null)
@@ -44,6 +47,16 @@ public class MainMenuUI : MonoBehaviour
         ResetAllViews();
         DisableAR();
         mainMenu.SetActive(true);
+        AnchorCheck();
+    }
+
+    public void EnterSting()
+    {
+
+    }
+    public void CopyString()
+    {
+        
     }
 
     #endregion
@@ -71,6 +84,20 @@ public class MainMenuUI : MonoBehaviour
         hostView.SetActive(false);
         editView.SetActive(false);
     }
+    private void AnchorCheck()
+    {
+        if(controller.churchAnchor != null)
+        {
+            editButton.SetActive(true);
+            copyIdButton.SetActive(true);
+        }
+        else
+        {
+            editButton.SetActive(false);
+            copyIdButton.SetActive(false);
+        }
+    }
+
 
 
 }
