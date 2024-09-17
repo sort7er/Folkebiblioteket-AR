@@ -8,6 +8,7 @@ public class ChurchEditor : MonoBehaviour
     [SerializeField] private GameObject rotateMenu;
     [SerializeField] private GameObject resizeMenu;
     [SerializeField] private ResolveController resolveController;
+    [SerializeField] private MainMenuUI mainMenuUI;
 
     private Church church;
 
@@ -21,6 +22,7 @@ public class ChurchEditor : MonoBehaviour
     {
         DisableAllMenus();
         resolveController.EditDone();
+        mainMenuUI.EnableAR();
     }
 
     public void SetChurch(Church church)
@@ -34,6 +36,7 @@ public class ChurchEditor : MonoBehaviour
         selectionMenu.SetActive(true);
 
         //Try and disable AR here later
+        mainMenuUI.DisableAR();
 
     }
 
@@ -41,16 +44,19 @@ public class ChurchEditor : MonoBehaviour
     {
         DisableAllMenus();
         relocateMenu.SetActive(true);
+        mainMenuUI.EnableAR();
     }
     public void Rotate()
     {
         DisableAllMenus();
         rotateMenu.SetActive(true);
+        mainMenuUI.EnableAR();
     }
     public void Resize()
     {
         DisableAllMenus();
         resizeMenu.SetActive(true);
+        mainMenuUI.EnableAR();
 
     }
     private void DisableAllMenus()
