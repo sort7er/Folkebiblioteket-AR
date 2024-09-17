@@ -1,12 +1,14 @@
+using System;
+using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 using UnityEngine.XR.ARFoundation;
 
 public class SessionController : MonoBehaviour
 {
-
     [SerializeField] private MainMenuUI mainMenuUI;
 
-    public GameObject churchPrefab;
+    public Church churchPrefab;
     public Camera mainCamera;
     public ARPlaneManager planeManager;
     public ARRaycastManager raycastManager;
@@ -14,7 +16,6 @@ public class SessionController : MonoBehaviour
 
     public bool isReturning { get; private set; }
     public ChurchAnchor churchAnchor { get; private set; }
-
 
 
     public void SetIsReturning(bool state)
@@ -32,7 +33,7 @@ public class SessionController : MonoBehaviour
         }
     }
 
-    public void ErrorCheckAndDisableSleep()
+    public bool ErrorCheckAndDisableSleep()
     {
         // Only allow the screen to sleep when not tracking.
         var sleepTimeout = SleepTimeout.NeverSleep;
@@ -46,7 +47,7 @@ public class SessionController : MonoBehaviour
 
         if (isReturning)
         {
-            return;
+            return true;
         }
 
         // Return to home page if ARSession is in error status.
@@ -57,12 +58,14 @@ public class SessionController : MonoBehaviour
 
             if (isReturning)
             {
-                return;
+                return true;
             }
 
             SetIsReturning(true);
             Invoke(nameof(DoReturnToHomePage), 3.0f);
         }
+
+        return false;
     }
 
     private void DoReturnToHomePage()
@@ -85,4 +88,14 @@ public class SessionController : MonoBehaviour
             churchAnchor.id = id;
         }
     }
+
+    public void CheckDoAndNull<T>(ref T type, Action thingToDo = null) where T : class
+    {
+        if (type != null)
+        {
+            thingToDo?.Invoke();
+            type = null;
+        }
+    }
+
 }

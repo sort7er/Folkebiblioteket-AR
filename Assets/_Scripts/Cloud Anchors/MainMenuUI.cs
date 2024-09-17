@@ -8,6 +8,8 @@ public class MainMenuUI : MonoBehaviour
     [SerializeField] private GameObject mainMenu;
     [SerializeField] private GameObject hostView;
     [SerializeField] private GameObject editView;
+    [SerializeField] private GameObject cantResolveMessage;
+    [SerializeField] private SessionController controller;
 
 
 
@@ -22,9 +24,20 @@ public class MainMenuUI : MonoBehaviour
 
     public void EditChurch()
     {
-        ResetAllViews();
-        EnableAR();
-        editView.SetActive(true);
+        if(controller.churchAnchor!= null)
+        {
+            ResetAllViews();
+            EnableAR();
+            editView.SetActive(true);
+        }
+        else
+        {
+            cantResolveMessage.SetActive(true);
+        }
+    }
+    public void CantResolveMessageDone()
+    {
+        cantResolveMessage.SetActive(false);
     }
     public void MainMenu()
     {

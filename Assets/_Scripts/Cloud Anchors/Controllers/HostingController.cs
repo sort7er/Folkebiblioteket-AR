@@ -10,7 +10,6 @@ using UnityEngine.XR.ARSubsystems;
 
 public class HostingController : MonoBehaviour
 {
-    [SerializeField] private GameObject instructionBar;
     [SerializeField] private TextMeshProUGUI instructionText;
     [SerializeField] private SessionController controller;
     [SerializeField] private MapQualityIndicator mapQualityIndicatorPrefab;
@@ -20,13 +19,13 @@ public class HostingController : MonoBehaviour
 
 
     private const float startPrepareTime = 3.0f;
+    private float timeSinceStart;
 
     private HostCloudAnchorPromise hostPromise;
     private HostCloudAnchorResult hostResult;
     private IEnumerator hostCoroutine;
     private MapQualityIndicator mapQualityIndicator = null;
     private ARAnchor anchor;
-    private float timeSinceStart;
 
     private void OnEnable()
     {
@@ -44,22 +43,15 @@ public class HostingController : MonoBehaviour
 
     private void OnDisable()
     {
-        CheckDoAndNull(ref mapQualityIndicator, () => Destroy(mapQualityIndicator.gameObject));
-        CheckDoAndNull(ref anchor, () => Destroy(anchor.gameObject));
-        CheckDoAndNull(ref hostCoroutine, () => StopCoroutine(hostCoroutine));
-        CheckDoAndNull(ref hostResult, () => hostPromise.Cancel());
-        CheckDoAndNull(ref hostResult);
+        controller.CheckDoAndNull(ref mapQualityIndicator, () => Destroy(mapQualityIndicator.gameObject));
+        controller.CheckDoAndNull(ref anchor, () => Destroy(anchor.gameObject));
+        controller.CheckDoAndNull(ref hostCoroutine, () => StopCoroutine(hostCoroutine));
+        controller.CheckDoAndNull(ref hostResult, () => hostPromise.Cancel());
+        controller.CheckDoAndNull(ref hostResult);
 
         controller.UpdatePlaneVisibility(false);
     }
-    private void CheckDoAndNull<T>(ref T type, Action thingToDo = null) where T : class
-    {
-        if (type != null)
-        {
-            thingToDo?.Invoke();
-            type = null;
-        }
-    }
+
     private void SetInstructionText(string text)
     {
         instructionText.text = text;
@@ -68,7 +60,7 @@ public class HostingController : MonoBehaviour
     {
         if (timeSinceStart < startPrepareTime)
         {
-            instructionText.text = "Initializing";
+            SetInstructionText("Initializing");
             timeSinceStart += Time.deltaTime;
             if (timeSinceStart >= startPrepareTime)
             {
@@ -78,7 +70,10 @@ public class HostingController : MonoBehaviour
             return;
         }
 
-        controller.ErrorCheckAndDisableSleep();
+        if (controller.ErrorCheckAndDisableSleep())
+        {
+            return;
+        }
 
         if (controller.isReturning)
         {
