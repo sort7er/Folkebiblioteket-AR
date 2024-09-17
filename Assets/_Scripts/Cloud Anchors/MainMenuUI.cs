@@ -9,6 +9,7 @@ public class MainMenuUI : MonoBehaviour
     [SerializeField] private GameObject hostView;
     [SerializeField] private GameObject editView;
     [SerializeField] private GameObject cantResolveMessage;
+    [SerializeField] private GameObject enterStringView;
     [SerializeField] private GameObject editButton, copyIdButton;
     [SerializeField] private SessionController controller;
 
@@ -50,13 +51,15 @@ public class MainMenuUI : MonoBehaviour
         AnchorCheck();
     }
 
-    public void EnterSting()
+    public void EnterAnchor()
     {
-
+        ResetAllViews();
+        enterStringView.SetActive(true);
     }
-    public void CopyString()
+    public void CopyAnchor()
     {
-        
+        GUIUtility.systemCopyBuffer = controller.churchAnchor.GetChurchAnchorSting();
+        Debug.Log("Copied string: " + controller.churchAnchor.GetChurchAnchorSting());
     }
 
     #endregion
@@ -83,6 +86,7 @@ public class MainMenuUI : MonoBehaviour
         mainMenu.SetActive(false);
         hostView.SetActive(false);
         editView.SetActive(false);
+        enterStringView.SetActive(false);
     }
     private void AnchorCheck()
     {
