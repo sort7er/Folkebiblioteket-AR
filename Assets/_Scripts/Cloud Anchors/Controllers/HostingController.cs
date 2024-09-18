@@ -14,7 +14,9 @@ public class HostingController : MonoBehaviour
     [SerializeField] private MapQualityIndicator mapQualityIndicatorPrefab;
 
     //Can't be more than one unless the project is not using an API key, then it is 365 days
-    [SerializeField] int lifetimeOfAnchorInDays = 1;
+    [SerializeField] private int lifetimeOfAnchorInDays = 1;
+    [SerializeField] private GameObject enterNamePanel;
+    [SerializeField] private TMP_InputField nameField;
 
 
     private const float startPrepareTime = 3.0f;
@@ -239,18 +241,37 @@ public class HostingController : MonoBehaviour
 
         if (hostResult.CloudAnchorState == CloudAnchorState.Success)
         {
-            string id = hostResult.CloudAnchorId;
-
-            SetInstructionText("Finished!");
-            controller.SaveCurrentCloudAnchorId("name", id);
-            controller.SaveTransform(Vector3.forward * 20, 270, 1);
-            Debug.Log($"Succeed to host the Cloud Anchor: {id}");
+            OpenNamePanel();
         }
         else
         {
             HostFailed(hostResult.CloudAnchorState.ToString());
         }
     }
+    private void OpenNamePanel()
+    {
+        enterNamePanel.SetActive(true);
+    }
+    public void Finished()
+    {
+        enterNamePanel.SetActive(false);
+
+        string name = nameField.text;
+
+        if(name == "")
+        {
+            name = "Unamed anchor";
+        }
+
+        string id = hostResult.CloudAnchorId;
+
+        SetInstructionText("Finished!");
+        controller.SaveCurrentCloudAnchorId(name, id);
+        controller.SaveTransform(Vector3.forward * 20, 270, 1);
+        Debug.Log($"Succeed to host the Cloud Anchor: {id}");
+    }
+
+
     private void HostFailed(string response = null)
     {
         SetInstructionText("Host failed.");
