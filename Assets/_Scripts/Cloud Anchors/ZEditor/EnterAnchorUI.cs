@@ -5,8 +5,8 @@ public class EnterAnchorUI : MonoBehaviour
 {
     [SerializeField] private GameObject resolveFailed;
     [SerializeField] private TMP_InputField inputField;
-    [SerializeField] private SessionController controller;
-    [SerializeField] private MainMenuUI mainMenuUI;
+    [SerializeField] private SessionControllerEditor controller;
+    [SerializeField] private MainMenuEditor mainMenuUI;
 
     private string anchorName;
     private string id;
@@ -16,7 +16,7 @@ public class EnterAnchorUI : MonoBehaviour
     private float localEulerY;
     private float localScale;
 
-    public float[] floatParams;
+    private float[] floatParams;
 
     private void Awake()
     {

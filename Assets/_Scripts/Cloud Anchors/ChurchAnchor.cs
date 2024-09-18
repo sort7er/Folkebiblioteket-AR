@@ -30,6 +30,7 @@ public class ChurchAnchor
         localPosY= localPos.y;
         localPosZ= localPos.z;
     }
+
     public void SetLocalEulerY(float y)
     {
         localEulerY = y;

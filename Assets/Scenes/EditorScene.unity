@@ -2364,8 +2364,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 787232277}
-        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
+      - m_Target: {fileID: 787232279}
+        m_TargetAssemblyTypeName: MainMenuEditor, Assembly-CSharp
         m_MethodName: EditChurch
         m_Mode: 1
         m_Arguments:
@@ -4307,8 +4307,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 787232277}
-        m_TargetAssemblyTypeName: SessionController, Assembly-CSharp
+      - m_Target: {fileID: 787232279}
+        m_TargetAssemblyTypeName: MainMenuEditor, Assembly-CSharp
         m_MethodName: MainMenu
         m_Mode: 1
         m_Arguments:
@@ -4776,7 +4776,7 @@ GameObject:
   - component: {fileID: 787232275}
   - component: {fileID: 787232274}
   - component: {fileID: 787232273}
-  - component: {fileID: 787232277}
+  - component: {fileID: 787232279}
   - component: {fileID: 787232278}
   m_Layer: 5
   m_Name: SessionController
@@ -4864,8 +4864,8 @@ RectTransform:
   - {fileID: 688535468}
   - {fileID: 468084463}
   - {fileID: 26117406}
-  - {fileID: 1940352595}
   - {fileID: 1810968068}
+  - {fileID: 1940352595}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -4873,7 +4873,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &787232277
+--- !u!114 &787232278
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4882,7 +4882,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 787232272}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 621ded83c2db9b241a24239fa813c7e6, type: 3}
+  m_Script: {fileID: 11500000, guid: b74582b31492ee541922d162f9a76c85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainMenuUI: {fileID: 787232279}
+  churchPrefab: {fileID: 482358568360707461, guid: da4ca6272173a9045853e63b01eac474,
+    type: 3}
+  mainCamera: {fileID: 1920515342}
+  planeManager: {fileID: 904521117}
+  raycastManager: {fileID: 904521122}
+  anchorManager: {fileID: 904521118}
+--- !u!114 &787232279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 787232272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b253a078a4d52346b210fa055a8c0f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   arSession: {fileID: 207147540}
@@ -4896,25 +4915,6 @@ MonoBehaviour:
   editButton: {fileID: 368165999}
   copyIdButton: {fileID: 1206668574}
   controller: {fileID: 787232278}
---- !u!114 &787232278
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 787232272}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02ecded80e3747a49a978e06dd63767f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainMenuUI: {fileID: 787232277}
-  churchPrefab: {fileID: 482358568360707461, guid: da4ca6272173a9045853e63b01eac474,
-    type: 3}
-  mainCamera: {fileID: 1920515342}
-  planeManager: {fileID: 904521117}
-  raycastManager: {fileID: 904521122}
-  anchorManager: {fileID: 904521118}
 --- !u!1 &798267149
 GameObject:
   m_ObjectHideFlags: 0
@@ -8085,8 +8085,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 787232277}
-        m_TargetAssemblyTypeName: MainMenuUI, Assembly-CSharp
+      - m_Target: {fileID: 787232279}
+        m_TargetAssemblyTypeName: MainMenuEditor, Assembly-CSharp
         m_MethodName: CopyAnchor
         m_Mode: 1
         m_Arguments:
@@ -8786,8 +8786,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 787232277}
-        m_TargetAssemblyTypeName: SessionController, Assembly-CSharp
+      - m_Target: {fileID: 787232279}
+        m_TargetAssemblyTypeName: MainMenuEditor, Assembly-CSharp
         m_MethodName: MainMenu
         m_Mode: 1
         m_Arguments:
@@ -8919,8 +8919,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 787232277}
-        m_TargetAssemblyTypeName: UIController, Assembly-CSharp
+      - m_Target: {fileID: 787232279}
+        m_TargetAssemblyTypeName: MainMenuEditor, Assembly-CSharp
         m_MethodName: Host
         m_Mode: 1
         m_Arguments:
@@ -11104,8 +11104,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 787232277}
-        m_TargetAssemblyTypeName: SessionController, Assembly-CSharp
+      - m_Target: {fileID: 787232279}
+        m_TargetAssemblyTypeName: MainMenuEditor, Assembly-CSharp
         m_MethodName: MainMenu
         m_Mode: 1
         m_Arguments:
@@ -12159,8 +12159,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 787232277}
-        m_TargetAssemblyTypeName: MainMenuUI, Assembly-CSharp
+      - m_Target: {fileID: 787232279}
+        m_TargetAssemblyTypeName: MainMenuEditor, Assembly-CSharp
         m_MethodName: EnterAnchor
         m_Mode: 1
         m_Arguments:
@@ -12476,8 +12476,7 @@ MonoBehaviour:
   resolveFailed: {fileID: 623576834}
   inputField: {fileID: 360536398}
   controller: {fileID: 787232278}
-  mainMenuUI: {fileID: 787232277}
-  floatParams: []
+  mainMenuUI: {fileID: 0}
 --- !u!1 &1842794520
 GameObject:
   m_ObjectHideFlags: 0
@@ -14698,7 +14697,7 @@ MonoBehaviour:
   rotateMenu: {fileID: 1216608971}
   resizeMenu: {fileID: 646264347}
   resolveController: {fileID: 26117407}
-  controller: {fileID: 787232278}
+  controller: {fileID: 0}
   locationText: {fileID: 698799392}
   rotationText: {fileID: 2130794807}
   scaleText: {fileID: 281392030}
@@ -15217,8 +15216,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 787232277}
-        m_TargetAssemblyTypeName: MainMenuUI, Assembly-CSharp
+      - m_Target: {fileID: 787232279}
+        m_TargetAssemblyTypeName: MainMenuEditor, Assembly-CSharp
         m_MethodName: CantResolveMessageDone
         m_Mode: 1
         m_Arguments:

@@ -4,14 +4,14 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 
-public class ResolveController : MonoBehaviour
+public class ResolveControllerEditor : MonoBehaviour
 {
 
     [SerializeField] private TextMeshProUGUI instructionText;
     [SerializeField] private GameObject instructionbar;
     [SerializeField] private GameObject backButton;
     [SerializeField] private GameObject editButton;
-    [SerializeField] private SessionController controller;
+    [SerializeField] private SessionControllerEditor controller;
     [SerializeField] private ChurchEditor churchEditor;
 
     private ResolveCloudAnchorPromise resolvePromise;

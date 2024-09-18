@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MainMenuUI : MonoBehaviour
+public class MainMenuEditor : MonoBehaviour
 {
     [SerializeField] private GameObject arSession;
     [SerializeField] private GameObject origin;
@@ -11,7 +11,7 @@ public class MainMenuUI : MonoBehaviour
     [SerializeField] private GameObject cantResolveMessage;
     [SerializeField] private GameObject enterStringView;
     [SerializeField] private GameObject editButton, copyIdButton;
-    [SerializeField] private SessionController controller;
+    [SerializeField] private SessionControllerEditor controller;
 
 
     private void Start()

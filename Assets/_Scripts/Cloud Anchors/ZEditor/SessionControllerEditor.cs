@@ -2,15 +2,16 @@ using System;
 using UnityEngine;
 using UnityEngine.XR.ARFoundation;
 
-public class SessionController : MonoBehaviour
+public class SessionControllerEditor : MonoBehaviour
 {
-    [SerializeField] private MainMenuUI mainMenuUI;
+    [SerializeField] private MainMenuEditor mainMenuUI;
 
     public Church churchPrefab;
     public Camera mainCamera;
     public ARPlaneManager planeManager;
     public ARRaycastManager raycastManager;
     public ARAnchorManager anchorManager;
+
 
     public bool isReturning { get; private set; }
     public ChurchAnchor churchAnchor { get; private set; }

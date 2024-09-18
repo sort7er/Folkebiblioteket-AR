@@ -10,7 +10,7 @@ using UnityEngine.XR.ARSubsystems;
 public class HostingController : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI instructionText;
-    [SerializeField] private SessionController controller;
+    [SerializeField] private SessionControllerEditor controller;
     [SerializeField] private MapQualityIndicator mapQualityIndicatorPrefab;
 
     //Can't be more than one unless the project is not using an API key, then it is 365 days

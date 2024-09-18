@@ -8,8 +8,9 @@ public class ChurchEditor : MonoBehaviour
     [SerializeField] private GameObject relocateMenu;
     [SerializeField] private GameObject rotateMenu;
     [SerializeField] private GameObject resizeMenu;
-    [SerializeField] private ResolveController resolveController;
-    [SerializeField] private SessionController controller;
+    [SerializeField] private ResolveControllerEditor resolveController;
+    [SerializeField] private SessionControllerEditor controller;
+
 
     [SerializeField] private TextMeshProUGUI locationText;
     [SerializeField] private TextMeshProUGUI rotationText;
