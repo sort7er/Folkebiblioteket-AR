@@ -126,7 +126,7 @@ public class SessionControllerEditor : MonoBehaviour
             churchAnchor.id = id;
         }
 
-        PlayerPrefs.SetString(nameKey, id);
+        PlayerPrefs.SetString(nameKey, name);
         PlayerPrefs.SetString(idKey, id);
     }
     public void SaveTransform(Vector3 localPosition, float eulerY, float scale)

@@ -35,9 +35,9 @@ public class EnterAnchorUI : MonoBehaviour
         {
             if (ValidateInput())
             {
-                controller.SaveCurrentCloudAnchorId(anchorName, id);
-
                 Vector3 localPos = new Vector3(xLocalPos, yLocalPos, zLocalPos);
+
+                controller.SaveCurrentCloudAnchorId(anchorName, id);
                 controller.SaveTransform(localPos, localEulerY, localScale);
                 mainMenuUI.EditChurch();
                 
@@ -67,11 +67,14 @@ public class EnterAnchorUI : MonoBehaviour
 
         anchorName = parameters[0];
         id = parameters[1];
-
+        Debug.Log(1);
         if (!Parse(parameters))
         {
             return false;
         }
+
+        
+
 
 
         xLocalPos = floatParams[0];
@@ -88,6 +91,8 @@ public class EnterAnchorUI : MonoBehaviour
         {
             if(!float.TryParse(paramaters[i + 2], out floatParams[i]))
             {
+                Debug.Log(floatParams[i]);
+                Debug.Log(paramaters[i + 2]);
                 return false;
             }
         }

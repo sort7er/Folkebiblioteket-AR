@@ -1,10 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Search;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.UIElements;
 using UnityEngine.XR.ARFoundation;
 
 public class SessionControllerUser : MonoBehaviour

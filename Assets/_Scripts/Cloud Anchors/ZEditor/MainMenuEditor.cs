@@ -58,8 +58,8 @@ public class MainMenuEditor : MonoBehaviour
     }
     public void CopyAnchor()
     {
-        GUIUtility.systemCopyBuffer = controller.churchAnchor.GetChurchAnchorSting();
-        Debug.Log("Copied string: " + controller.churchAnchor.GetChurchAnchorSting());
+        GUIUtility.systemCopyBuffer = controller.churchAnchor.GetChurchAnchorString();
+        Debug.Log("Copied string: " + controller.churchAnchor.GetChurchAnchorString());
     }
 
     #endregion

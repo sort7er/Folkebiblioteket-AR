@@ -40,8 +40,8 @@ public class ChurchAnchor
         localScale = scale;
     }
 
-    public string GetChurchAnchorSting()
+    public string GetChurchAnchorString()
     {
-        return name + ";" + id + ";" + localPosX + ";" + localPosY + ";" + localPosZ + ";" + localEulerY + ";" + localScale;
+        return name + ";" + id + ";" + localPosX.ToString("f") + ";" + localPosY.ToString("f") + ";" + localPosZ.ToString("f") + ";" + localEulerY.ToString("f") + ";" + localScale.ToString("f");
     }
 }
