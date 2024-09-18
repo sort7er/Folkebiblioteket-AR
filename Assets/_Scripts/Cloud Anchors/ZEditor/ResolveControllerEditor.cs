@@ -17,12 +17,9 @@ public class ResolveControllerEditor : MonoBehaviour
     private ResolveCloudAnchorPromise resolvePromise;
     private ResolveCloudAnchorResult resolveResult;
 
-    private const float startPrepareTime = 3.0f;
-    private float timeSinceStart;
 
     private void OnEnable()
     {
-        timeSinceStart = 0;
         resolvePromise = null;
         resolveResult = null;
 
@@ -51,11 +48,11 @@ public class ResolveControllerEditor : MonoBehaviour
 
     private void Update()
     {
-        if (timeSinceStart < startPrepareTime)
+        if (controller.timeSinceStart < controller.startPrepareTime)
         {
-            SetInstructionText("Initializing");
-            timeSinceStart += Time.deltaTime;
-            if (timeSinceStart >= startPrepareTime)
+            SetInstructionText("Move around the room");
+            controller.IncreaseTimeSinceStart();
+            if (controller.timeSinceStart >= controller.startPrepareTime)
             {
                 SetInstructionText("Look at the location you expect to see the AR experience appear.");
             }

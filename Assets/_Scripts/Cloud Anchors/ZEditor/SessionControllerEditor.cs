@@ -16,6 +16,9 @@ public class SessionControllerEditor : MonoBehaviour
     public bool isReturning { get; private set; }
     public ChurchAnchor churchAnchor { get; private set; }
 
+    public float startPrepareTime { get; private set; } = 10f;
+    public float timeSinceStart { get; private set; } = 0f;
+
 
     private const string idKey = "idKey";
     private const string nameKey = "nameKey";
@@ -150,6 +153,11 @@ public class SessionControllerEditor : MonoBehaviour
             thingToDo?.Invoke();
             type = null;
         }
+    }
+
+    public void IncreaseTimeSinceStart()
+    {
+        timeSinceStart += Time.deltaTime;
     }
 
 }

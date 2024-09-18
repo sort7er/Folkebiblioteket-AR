@@ -1,3 +1,4 @@
+using System.Globalization;
 using TMPro;
 using UnityEngine;
 
@@ -17,6 +18,9 @@ public class EnterAnchorUI : MonoBehaviour
     private float localScale;
 
     private float[] floatParams;
+
+    private NumberStyles style;
+    private CultureInfo culture;
 
     private void Awake()
     {
@@ -67,7 +71,7 @@ public class EnterAnchorUI : MonoBehaviour
 
         anchorName = parameters[0];
         id = parameters[1];
-        Debug.Log(1);
+
         if (!Parse(parameters))
         {
             return false;
@@ -83,18 +87,21 @@ public class EnterAnchorUI : MonoBehaviour
         localEulerY = floatParams[3];
         localScale = floatParams[4];
 
+        
+
         return true;
     }
     private bool Parse(string[] paramaters)
     {
         for(int i = 0; i < floatParams.Length; i++)
         {
-            if(!float.TryParse(paramaters[i + 2], out floatParams[i]))
+            style = NumberStyles.Float;
+            culture = CultureInfo.InvariantCulture;
+            if (!float.TryParse(paramaters[i + 2].Replace(",","."), style , culture, out floatParams[i]))
             {
-                Debug.Log(floatParams[i]);
-                Debug.Log(paramaters[i + 2]);
                 return false;
             }
+
         }
         return true;
     }

@@ -15,7 +15,7 @@ public class ResolveControllerUser : MonoBehaviour
     private ResolveCloudAnchorResult resolveResult;
 
 
-    private const float startPrepareTime = 3.0f;
+    private const float startPrepareTime = 10f;
     private float timeSinceStart;
 
     private void OnEnable()
@@ -47,7 +47,7 @@ public class ResolveControllerUser : MonoBehaviour
     {
         if (timeSinceStart < startPrepareTime)
         {
-            SetInstructionText("Initializing");
+            SetInstructionText("Move around the room");
             timeSinceStart += Time.deltaTime;
             if (timeSinceStart >= startPrepareTime)
             {

@@ -1,6 +1,5 @@
+using System.Globalization;
 using UnityEngine;
-using UnityEngine.InputSystem.XR;
-using UnityEngine.UI;
 
 public class BuildAnchor : MonoBehaviour
 {
@@ -18,6 +17,9 @@ public class BuildAnchor : MonoBehaviour
     private float localScale;
 
     private float[] floatParams;
+
+    private NumberStyles style;
+    private CultureInfo culture;
 
     private void Awake()
     {
@@ -70,10 +72,13 @@ public class BuildAnchor : MonoBehaviour
     {
         for (int i = 0; i < floatParams.Length; i++)
         {
-            if (!float.TryParse(paramaters[i + 2], out floatParams[i]))
+            style = NumberStyles.Float;
+            culture = CultureInfo.InvariantCulture;
+            if (!float.TryParse(paramaters[i + 2].Replace(",", "."), style, culture, out floatParams[i]))
             {
                 return false;
             }
+
         }
         return true;
     }

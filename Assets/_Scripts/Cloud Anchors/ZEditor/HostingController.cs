@@ -19,8 +19,7 @@ public class HostingController : MonoBehaviour
     [SerializeField] private TMP_InputField nameField;
 
 
-    private const float startPrepareTime = 3.0f;
-    private float timeSinceStart;
+
 
     private HostCloudAnchorPromise hostPromise;
     private HostCloudAnchorResult hostResult;
@@ -30,7 +29,6 @@ public class HostingController : MonoBehaviour
 
     private void OnEnable()
     {
-        timeSinceStart = 0.0f;
         anchor = null;
         mapQualityIndicator = null;
         hostPromise = null;
@@ -59,11 +57,13 @@ public class HostingController : MonoBehaviour
     }
     private void Update()
     {
-        if (timeSinceStart < startPrepareTime)
+        if (controller.timeSinceStart < controller.startPrepareTime)
         {
-            SetInstructionText("Initializing");
-            timeSinceStart += Time.deltaTime;
-            if (timeSinceStart >= startPrepareTime)
+            SetInstructionText("Move around the room");
+
+            controller.IncreaseTimeSinceStart();
+
+            if (controller.timeSinceStart >= controller.startPrepareTime)
             {
                 SetInstructionText("Tap to place an object.");
             }
