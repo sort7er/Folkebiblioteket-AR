@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "com.google.ar.core.arfoundation.extensions": {
-      "version": "file:arcore-unity-extensions-1.45.0-arf4/package",
+      "version": "file:arcore-unity-extensions-1.45.0-arf5/package",
       "depth": 0,
       "source": "local",
       "dependencies": {
