@@ -16,11 +16,10 @@ public class ResolveControllerUser : MonoBehaviour
 
 
     private const float startPrepareTime = 10f;
-    private float timeSinceStart;
+    private float timeSinceStart = 0;
 
     private void OnEnable()
     {
-        timeSinceStart = 0;
         resolvePromise = null;
         resolveResult = null;
 
@@ -90,8 +89,6 @@ public class ResolveControllerUser : MonoBehaviour
         {
             return;
         }
-
-
 
         resolvePromise = controller.anchorManager.ResolveCloudAnchorAsync(controller.churchAnchor.id);
 

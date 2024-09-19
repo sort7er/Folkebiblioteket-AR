@@ -37,14 +37,15 @@ public class MainMenuUser : MonoBehaviour
     private void EnableAR()
     {
         arOrigin.SetActive(true);
-        extensions.SetActive(true);
         session.SetActive(true);
+        //Extensions needs to be activa last
+        extensions.SetActive(true);
     }
     private void DisableAR()
     {
         arOrigin.SetActive(false);
-        extensions.SetActive(false);
         session.SetActive(false);
+        extensions.SetActive(false);
     }
 
 }

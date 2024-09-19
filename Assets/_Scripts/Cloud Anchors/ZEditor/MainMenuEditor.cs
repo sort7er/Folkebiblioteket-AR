@@ -72,6 +72,7 @@ public class MainMenuEditor : MonoBehaviour
     {
         origin.SetActive(true);
         arSession.SetActive(true);
+        //Extensions needs to be activa last
         extensions.SetActive(true);
     }
     public void DisableAR()
