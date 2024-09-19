@@ -1517,7 +1517,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainMenuUI: {fileID: 787232280}
-  churchPrefab: {fileID: 482358568360707461, guid: da4ca6272173a9045853e63b01eac474,
+  churchPrefab: {fileID: 482358568360707461, guid: 2048a698c804ba0438200d30f9f53279,
     type: 3}
   mainCamera: {fileID: 1920515342}
   planeManager: {fileID: 904521117}

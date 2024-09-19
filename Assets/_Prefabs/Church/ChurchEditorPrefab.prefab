@@ -377,7 +377,7 @@ GameObject:
   - component: {fileID: 5999460263258949012}
   - component: {fileID: 482358568360707461}
   m_Layer: 0
-  m_Name: ChurchPrefab
+  m_Name: ChurchEditorPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
