@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "com.google.ar.core.arfoundation.extensions": "file:arcore-unity-extensions-1.45.0-arf5/package",
+    "com.google.ar.core.arfoundation.extensions": "https://github.com/google-ar/arcore-unity-extensions.git#arf5",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.collab-proxy": "2.4.4",
     "com.unity.ide.rider": "3.0.27",
