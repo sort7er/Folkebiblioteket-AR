@@ -275,7 +275,7 @@ public class HostingController : MonoBehaviour
     private void HostFailed(string response = null)
     {
         SetInstructionText("Host failed.");
-        Debug.Log("Failed to host a Cloud Anchor" + (response == null ? "." : "with error " + response + "."));
+        Debug.Log("Failed to host a Cloud Anchor" + (response == null ? "." : " with error " + response + "."));
     }
 
 }
